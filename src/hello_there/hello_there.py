@@ -5,6 +5,6 @@ def greeting(greetings: str) -> str:
     :return: "General Kenobi" if greeting is correct, None otherwise
     """
     if greetings == "Hello there":
-        return "General Kenobi"
+        return "General Kenob"
     else:
         return None
