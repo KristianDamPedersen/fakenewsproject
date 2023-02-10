@@ -8,7 +8,7 @@ Before merging any code into main, it should fulfil the following criteria:
 * All tests (unit or otherwise) should be passing
 * All new code should be properly tested
 * All new code should be adequately documented
-* If the changes affect the rapport (either in being able to write more, or modify what's already there), the rapport should be updated accordingly.
+* If the changes affect the report (either in being able to write more, or modify what's already there), the report should be updated accordingly.
 We aim to merge to main as frequently is possible, so please create pull requests and go through the above steps after each small change.
 
 #### Branch rules
@@ -16,6 +16,9 @@ We aim to merge to main as frequently is possible, so please create pull request
 * In order to merge to main, create a pull req. your code should fulfil the code quality requirements.
 * The pull req. must be reviewed by one other person before being able to be merged.
 
+#### Report rules
+* No macros within the latex document, your own personal macros should be put into your editor of choice or otherwise.
+* Document is to be compiled with the latest engine, LuaLaTeX to prevent inconsistencies.
 
 #### Folder strucure
 Here is an overview of our folder-structure:
