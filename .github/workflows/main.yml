@@ -32,21 +32,21 @@ jobs:
       run: |
         git checkout artifacts || git checkout -b artifacts
 
-    - name: Add, commit, and push PDF
-      run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "Github Actions"
-        git add report/master.pdf
-        git commit -m "Add report/master.pdf"
-        git push origin artifacts
+        #    - name: Add, commit, and push PDF
+        #      run: |
+        #        git config --global user.email "action@github.com"
+        #        git config --global user.name "Github Actions"
+        #        git add report/master.pdf
+        #        git commit -m "Add report/master.pdf"
+        #        git push origin artifacts
 
 
 
-        #    - name: Upload PDF
-        #      uses: actions/upload-artifact@v1
-        #      with:
-        #        name: master.pdf
-        #        path: report/master.pdf
+    - name: Upload PDF
+      uses: actions/upload-artifact@v1
+      with:
+        name: master.pdf
+        path: report/master.pdf
         #
         #    - name: Save logs
         #      uses: actions/upload-artifact@v1
