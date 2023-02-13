@@ -16,16 +16,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up LaTeX environment
-      uses: actions/setup-tex@v1
-      with:
-        tex-live-version: latest
-
     - name: Compile LaTeX to PDF
-      run: |
-        cd report
-        pdflatex master.tex
-        pdflatex master.tex
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: report/master.tex
 
     - name: Upload PDF
       uses: actions/upload-artifact@v1
@@ -39,3 +33,4 @@ jobs:
       with:
         name: logs
         path: .
+
