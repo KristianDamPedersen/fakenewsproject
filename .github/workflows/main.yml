@@ -22,9 +22,6 @@ jobs:
         root_file: report/master.tex
         work_in_root_file_dir: true
 
-    - name: Move PDF to desired location
-      run: mv master.pdf report/master.pdf
-
     - name: Upload PDF
       uses: actions/upload-artifact@v1
       with:
