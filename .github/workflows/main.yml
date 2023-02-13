@@ -28,6 +28,9 @@ jobs:
           echo "ERROR: PDF file not found"
           exit 1
         fi
+    - name: Checkout artifacts branch
+      run: |
+        git checkout artifacts || git checkout -b artifacts
 
     - name: Add, commit, and push PDF
       run: |
@@ -35,7 +38,8 @@ jobs:
         git config --global user.name "Github Actions"
         git add report/master.pdf
         git commit -m "Add report/master.pdf"
-        git push origin HEAD
+        git push origin artifacts
+
 
 
         #    - name: Upload PDF
