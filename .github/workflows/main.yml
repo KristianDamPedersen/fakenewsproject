@@ -1,0 +1,41 @@
+name: Compile LaTeX to PDF
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up LaTeX environment
+      uses: actions/setup-tex@v1
+      with:
+        tex-live-version: latest
+
+    - name: Compile LaTeX to PDF
+      run: |
+        cd report
+        pdflatex master.tex
+        pdflatex master.tex
+
+    - name: Upload PDF
+      uses: actions/upload-artifact@v1
+      with:
+        name: master.pdf
+        path: report/master.pdf
+
+    - name: Save logs
+      uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: logs
+        path: .
