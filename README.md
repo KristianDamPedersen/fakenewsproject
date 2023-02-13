@@ -30,6 +30,7 @@ Here is an overview of our folder-structure:
     * my_module/
       * \_\_init\_\_.py
       * my_module.py
+      * test_my_module.py
       * my_module.md
     * .../
   * report/
@@ -60,7 +61,7 @@ All notebooks can be found in the root folder. This means that we have to be tid
 
 ###### To illustrate the above, i have made some placeholder files designed the "hello_there" module.
 ## Testing
-We are using the pytest library for our unit-tests. For documentation see: 
+We are using the pytest library for our unit-tests. For documentation see: https://docs.pytest.org/en/7.2.x/
 To execute all the tests, run the following command in the root directory of the project:
 ```
 pytest
