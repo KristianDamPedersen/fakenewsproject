@@ -32,13 +32,14 @@ jobs:
       run: |
         git checkout artifacts || git checkout -b artifacts
 
-        #    - name: Add, commit, and push PDF
-        #      run: |
-        #        git config --global user.email "action@github.com"
-        #        git config --global user.name "Github Actions"
+    - name: Add, commit, and push PDF
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "Github Actions"
         #        git add report/master.pdf
         #        git commit -m "Add report/master.pdf"
-        #        git push origin artifacts
+        git commit -m "Just a test"
+        git push origin artifacts
 
 
 
