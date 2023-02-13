@@ -31,8 +31,8 @@ jobs:
 
     - name: Setup Git for report repository
       run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "Github Actions"
+        git config --global user.email "email@lutzen.co"
+        git config --global user.name "BinFlush"
         git remote add report https://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@github.com/BinFlush/DS-Fakenews-report.git
         git fetch report
 
