@@ -1,4 +1,4 @@
 .idea
 .pytest_cache
 /notebooks/.ipynb_checkpoints
-data/
+data/*
