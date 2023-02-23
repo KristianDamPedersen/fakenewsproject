@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import requests
+import subprocess
 from definitions import *
 def download_raw_data(url: str):
     if (url[-3:] != 'csv'):
@@ -19,11 +20,19 @@ def download_raw_data(url: str):
 def import_data(sample=True, overwrite=False):
     if sample:
         sample_file_path = os.path.join(DATA_PATH, "data.csv")
-        if not os.path.isfile(sample_file_path) or overwrite:
+        if (not os.path.isfile(sample_file_path)) or overwrite:
             download_raw_data(SAMPLE_URL)
         return pd.read_csv(sample_file_path)
     else:
-        return None
+        dataset_file_path = os.path.join(DATA_PATH, "dataset.parquet")
+        if (not os.path.isfile(dataset_file_path)) or overwrite:
+            process = subprocess.Popen(["download_data.sh"], shell=True)
+            process.wait() # Wait will its done downloading stuff
+            df = pd.read_csv("joined_news.csv.zip")
+            df.to_parquet(dataset_file_path)
+
+            os.remove("joined_news.csv.zip")
+        
 
 
 
