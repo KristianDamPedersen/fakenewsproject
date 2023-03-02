@@ -1,5 +1,7 @@
 import pandas as pd
 import os
+import sys
+sys.path.append('../../')
 import requests
 import subprocess
 from definitions import *
