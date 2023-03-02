@@ -18,6 +18,11 @@ def download_raw_data(url: str):
     return
 
 def import_data(sample=True, overwrite=False):
+    """
+    Downloads and creates the dataset locally in the data folder.
+    :param sample: If True, only a sample of the data is downloaded.
+    :param overwrite: If True, the data is downloaded again, even if it already exists.
+    """
     if sample:
         sample_file_path = os.path.join(DATA_PATH, "data.csv")
         if (not os.path.isfile(sample_file_path)) or overwrite:
