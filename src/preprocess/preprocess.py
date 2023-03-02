@@ -35,12 +35,12 @@ def import_data(sample=True, overwrite=False):
         if (not os.path.isfile(dataset_file_path)) or overwrite:
             #process = subprocess.Popen(["download_data.sh"], shell=True)
             #process.wait() # Wait will its done downloading stuff
-            df = pd.read_csv("news_cleaned_2018_02_13.csv")
+            df = pd.read_csv("../../data/news_cleaned_2018_02_13.csv")
             df.to_parquet(dataset_file_path)
 
             os.remove("news_cleaned_2018_02_13")
         
 
-
+import_data(sample=False)
 
 
