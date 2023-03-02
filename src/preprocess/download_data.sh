@@ -1,3 +1,5 @@
+#!/bin/bash
+
 TEMPDIR=$(mktemp -d)
 
 # Download all of the 9 parts including the main zip
