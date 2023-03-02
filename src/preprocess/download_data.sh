@@ -1,5 +1,4 @@
 TEMPDIR=$(mktemp -d)
-pushd $TEMPDIR
 
 # Download all of the 9 parts including the main zip
 for i in {01..09} "ip"
@@ -9,11 +8,7 @@ done
 
 echo "Done downloading files:\n"
 
-echo "Packing split archive into a single archive"
-zip -FF "news.csv.zip" --out "joined_news.csv.zip"
-
-popd
-
-mv "$TEMPDIR/joined_news.csv.zip" .
+echo "Extracting archives"
+7z x $TEMPDIR/news.csv.zip -o"../../data"
 
 rm -r $TEMPDIR
