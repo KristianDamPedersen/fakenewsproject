@@ -9,4 +9,4 @@ done
 echo "Done downloading files:\n"
 
 echo "Extracting archives"
-7z x $TEMPDIR/news.csv.zip -o"../../data" && rm -r $TEMPDIR
+7z x $TEMPDIR/news.csv.zip -y -o"../../data" && rm -r $TEMPDIR
