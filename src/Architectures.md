@@ -9,7 +9,7 @@ Linear SVM?
 ### Josh model 1
 Lemmatise dataset  
 Encode entire sentences as embeddings with BERT  
-
+Find other contextual clues: typoes, punctuation frequency, proportion of all caps etc.
 Train on XGBoost
 
 
