@@ -9,6 +9,7 @@ pandas = "*"
 requests = "*"
 xgboost = "*"
 dask = "*"
+nltk = "*"
 
 [dev-packages]
 
