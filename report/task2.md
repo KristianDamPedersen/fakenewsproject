@@ -7,5 +7,7 @@ Some columns are entirely comprised of missing values, some have mostly missing 
 
 Some articles start with one or more newlines or end with one or more newlines.  
 
+Rouhgly 80% of the wikileaks pages all just contain a string saying to use TOR. This is almost 2% of the dataset.
+
 ## Considerations about data
 We decided to remove all the timestamps since they have no predicting power, they only tell us when the data was scraped and processed.  
