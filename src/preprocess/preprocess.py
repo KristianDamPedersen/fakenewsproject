@@ -41,6 +41,4 @@ def import_data(sample=True, overwrite=False):
             os.remove("news_cleaned_2018_02_13")
         
 
-import_data(sample=False)
-
 

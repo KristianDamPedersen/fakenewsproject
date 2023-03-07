@@ -8,7 +8,7 @@ pytest = "*"
 pandas = "*"
 requests = "*"
 xgboost = "*"
-dask = "*"
+dask = {extras = ["diagnostics"], version = "*"}
 nltk = "*"
 
 [dev-packages]
