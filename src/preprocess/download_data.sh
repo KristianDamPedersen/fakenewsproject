@@ -20,4 +20,5 @@ rm temp.zip
 sed 's/\r/ /g' news_cleaned_2018_02_13.csv > cr_removed.csv
 rm news_cleaned_2018_02_13.csv
 popd
+mkdir dataset.parquet
 mv $TEMPDIR\cr_removed.csv .
