@@ -8,7 +8,7 @@ pytest = "*"
 pandas = "*"
 requests = "*"
 xgboost = "*"
-dask = {extras = ["diagnostics"], version = "*"}
+dask = {extras = ["distributed"], version = "*"}
 nltk = "*"
 graphviz = "*"
 
