@@ -10,6 +10,7 @@ requests = "*"
 xgboost = "*"
 dask = {extras = ["diagnostics"], version = "*"}
 nltk = "*"
+graphviz = "*"
 
 [dev-packages]
 
