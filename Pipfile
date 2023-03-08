@@ -13,6 +13,8 @@ nltk = "*"
 graphviz = "*"
 pyarrow = "*"
 dask-ml = "*"
+fastparquet = "*"
+matplotlib = "*"
 
 [dev-packages]
 
