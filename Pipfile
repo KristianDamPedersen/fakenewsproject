@@ -11,6 +11,8 @@ xgboost = "*"
 dask = {extras = ["distributed"], version = "*"}
 nltk = "*"
 graphviz = "*"
+pyarrow = "*"
+dask-ml = "*"
 
 [dev-packages]
 
