@@ -5,26 +5,18 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-	\lipsum[1]
-\end{abstract}
-
 
 % keywords can be removed
-\keywords{First keyword \and Second keyword \and More}
+%\keywords{First keyword \and Second keyword \and More}
 
 
-\section{Introduction}
-\lipsum[2]
-\lipsum[3]
 
-
-\section{Headings: first level}
+\section{Data Processing}
 \label{sec:headings}
-
-\lipsum[4] See Section \ref{sec:headings}.
-
-\subsection{Headings: second level}
+\subsection{Getting the data}
+The first challenge was simply downloading and unpacking the files on our Linux systems. Using different GUI tools failed, and in the end, the method that worked was simply concatinating the files into a temporary zip file using \texttt{cat}, and then unzipping the combined file using \texttt{unzip}.\\
+\\
+Trying to read the data in python proved to be a challenging task, as the .csv file seemed to be corrupted with rows containing different amounts of columns. After some manual exploration, we found the problem which turned out to be carriage returns. Some article content included \texttt{\\r}
 \lipsum[5]
 \begin{equation}
 	\xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
