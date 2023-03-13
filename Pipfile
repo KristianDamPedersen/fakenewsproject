@@ -15,6 +15,7 @@ pyarrow = "*"
 dask-ml = "*"
 fastparquet = "*"
 matplotlib = "*"
+spacy = "*"
 
 [dev-packages]
 
