@@ -16,6 +16,8 @@ dask-ml = "*"
 fastparquet = "*"
 matplotlib = "*"
 spacy = "*"
+sentence-transformers = "*"
+jupyter = "*"
 
 [dev-packages]
 
