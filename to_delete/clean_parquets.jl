@@ -1,3 +1,6 @@
+# REASON FOR DELETION: we already have another script to remove columns(?)
+
+
 using Parquet, DataFrames, Missings
 
 const df_template = DataFrame(

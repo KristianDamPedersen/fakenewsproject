@@ -1,3 +1,4 @@
+# REASON FOR DELETION: we already parquetise in Jakup's notebook
 # Convert the csv to many parquet files, each containing 10000 rows
 import pandas as pd
 import pyarrow as pa

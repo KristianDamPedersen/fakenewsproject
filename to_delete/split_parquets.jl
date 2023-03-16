@@ -1,3 +1,5 @@
+# REASON FOR DELETION: we already have a thing to split dataset into three with dask
+
 using DataFrames, Parquet, Random
 
 function split_df(df, train=0.8, val=0.1)
