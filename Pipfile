@@ -18,6 +18,7 @@ matplotlib = "*"
 spacy = "*"
 sentence-transformers = "*"
 jupyter = "*"
+joblib = "*"
 
 [dev-packages]
 
