@@ -14,7 +14,7 @@
 \section{Data Processing}
 \subsection{Sample data}
 We downloaded the sample data and loaded it into a pandas dataframe, which did not pose any challenges. 
-We then performed tokenization, stopword removal and stemming (see notebook for details). Our processing revealed:
+We then performed tokenization, stopword removal, lowercasing and stemming (see notebook for details). Our processing revealed:
 \begin{table}[h]
     \centering
     \begin{tabular}{r| c | c | c| c}
@@ -33,8 +33,7 @@ We then performed tokenization, stopword removal and stemming (see notebook for 
 \subsection{Getting the data}
 The first challenge was simply downloading and unpacking the files on our Linux systems. Using different GUI tools failed, and in the end, the method that worked was simply concatinating the files into a temporary zip file using \texttt{cat}, and then unzipping the combined file using \texttt{unzip}.\\
 \\
-Trying to read the data in python proved to be a challenging task, as the .csv file seemed to be corrupted with rows containing different amounts of columns. After some manual exploration, we found the problem which turned out to be carriage returns. Some article content included \texttt{\textbackslash r}, which was interpreted as "newline", and thus, a new row in the middle of arbitrary news content. A single command '\texttt{sed 's/\textbackslash r/ /g' in.csv > out.csv}' replacing the carriage returns with spaces (to preserve word boundaries) turned out to solve this issue.\\
-
+Trying to read the data in python proved to be a challenging task, as the .csv file seemed to be corrupted or malformed with rows containing different amounts of columns. After some manual exploration, we found the problem which turned out to be carriage returns. Some article content included \texttt{\textbackslash r}, which was interpreted as "newline", and thus, a new row in the middle of arbitrary news content. A single command '\texttt{sed 's/\textbackslash r/ /g' in.csv > out.csv}' replacing the carriage returns with spaces (to preserve word boundaries) turned out to solve this issue.\\
 
 \subsection{Working with larger than memory datasets}
 One of the main hurdles to overcome when gathering and processing the data, was the fact that the dataset was larger
@@ -42,7 +41,7 @@ than our available RAM. This prevented us from loading all of the dataset into m
 dataframes) at any one time. To overcome this limitation we chose to first revise the format of our data. We decided to
 convert the large CSV file into the more managable \textit{parquet} format (see jupyter notebook for conversion script). The advantage of parquet files, is that they
 come with detailed associated meta-data. In the meta-data we were able to split our dataset into chunks, which we could
-then use to sequentially load the dataset into memory in bites, and put it back together correctly.
+then use to sequentially load the dataset into memory in bytes, and put it back together correctly.
 
 Pandas unfortunately doesn't support this sequential streaming into memory, so we decided to switch to a library called
 \textit{Dask}. Dask is designed around working with larger than memory datasets, and leverage an advanced scheduler to both
@@ -78,6 +77,10 @@ Some columns are largely unused, and some important columns have arbitrary empty
 \subsubsection{Other fun metrics????}
 .,.,.,.,.,.,.,.
 \newpage
+
+\section{Simple model}
+\subsection{Limitations to our grouping of classes}
+We decided to only keep the "reliable" and "fake" classes from the dataset and disregarded everything else. This gave us a dataset that was still about 2 million rows which is already too big to train anything on. Potential limitations are that we don't have as many domains and we don't have a big diverse range of article types.
 
 \subsection{Citations}
 Citations use \verb+natbib+. The documentation may be found at
