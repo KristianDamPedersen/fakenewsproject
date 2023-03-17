@@ -17,16 +17,18 @@ We downloaded the sample data and loaded it into a pandas dataframe, which did n
 We then performed tokenization, stopword removal and stemming (see notebook for details). Our processing revealed:
 \begin{table}[h]
     \centering
-    \begin{tabular}{r| c}
-        Data& vocabulary size\\
+    \begin{tabular}{r| c | c | c| c}
+      Data& vocabulary size & vocabulary size (lowered) & \% decrease & \% decrease (lowered)\\
         \hline
-    Sample data& NUMBER \\
+      Sample data& 21016 & 18011 & 0\% & 0\% \\
     \hline
-    Stopword removed & NUMBER \\
+      Removed stopwords & 20674 & 17865 & 1.63\% & 0.81\% \\
     \hline
-    Stemmed & NUMBER
+      Stemmed & 12654 & 12703 & 39.8\% & 29.5\%
     \end{tabular}
 \end{table}
+% TODO ADD THESE NUMBERS TO TABLE
+
 \label{sec:headings}
 \subsection{Getting the data}
 The first challenge was simply downloading and unpacking the files on our Linux systems. Using different GUI tools failed, and in the end, the method that worked was simply concatinating the files into a temporary zip file using \texttt{cat}, and then unzipping the combined file using \texttt{unzip}.\\
