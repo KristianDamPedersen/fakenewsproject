@@ -15,13 +15,13 @@ def pass_fun(doc):
     return doc
 
 tfidf = TfidfVectorizer(max_features=2048, sublinear_tf=True, preprocessor=pass_fun, tokenizer=pass_fun)
-pickle.dump(lr, open("tfidf.pkl", "wb"))
 
 X_train = tfidf.fit_transform(X_train)
+pickle.dump(tfidf, open("tfidf.pkl", "wb"))
 
 svd = TruncatedSVD(n_components=256, random_state = 42)
-pickle.dump(lr, open("svd.pkl", "wb"))
 X_train = svd.fit_transform(X_train)
+pickle.dump(svd, open("svd.pkl", "wb"))
 
 lr = LogisticRegression(random_state=42)
 lr.fit(X_train, y_train)
