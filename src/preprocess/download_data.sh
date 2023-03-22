@@ -1,8 +1,8 @@
 #!/bin/bash
 
-TEMPDIR=$(mktemp -d)
+#TEMPDIR=$(mktemp -d)
 
-pushd $TEMPDIR
+#pushd $TEMPDIR
 # Download all of the 9 parts including the main zip
 for i in {01..09} "ip"
 do
@@ -19,6 +19,6 @@ unzip temp.zip
 rm temp.zip
 sed 's/\r/ /g' news_cleaned_2018_02_13.csv > cr_removed.csv
 rm news_cleaned_2018_02_13.csv
-popd
+#popd
 mkdir dataset.parquet
-mv $TEMPDIR\cr_removed.csv .
+#mv \cr_removed.csv .
