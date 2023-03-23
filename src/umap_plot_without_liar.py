@@ -51,8 +51,7 @@ colours = ["yellow", # Rumor
            "green", # RELIABLE
            "red", # Fake
            "orange", # Biased
-           "#666040", # None
-           "orange", # Unrealiable
+           "#666040", # Unrealiable
            "#6600ff", # Hate
            "cyan", # Conspiracy
            "grey", # Clickbait
