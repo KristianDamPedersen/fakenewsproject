@@ -31,7 +31,7 @@ pickle.dump(lr, open("lr.pkl", "wb"))
 df_test = pd.read_parquet("test.parquet")
 
 X_test = df_test["tokens"]
-y_train = df_test["class"]
+y_test = df_test["class"]
 
 X_test = svd.transform(tfidf.transform(X_test))
 score = lr.score(X_test, y_test)
