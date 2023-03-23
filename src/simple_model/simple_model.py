@@ -17,7 +17,7 @@ def pass_fun(doc):
 tfidf = TfidfVectorizer(max_features=2048, sublinear_tf=True, preprocessor=pass_fun, tokenizer=pass_fun)
 
 X_train = tfidf.fit_transform(X_train)
-pickle.dump(tfidf, open("tfidf.pkl", "wb"))
+pickle.dump(tfidf, open("tfidf-2048.pkl", "wb"))
 
 svd = TruncatedSVD(n_components=256, random_state = 42)
 X_train = svd.fit_transform(X_train)

@@ -11,7 +11,7 @@ def pass_fun(doc):
 
 print("Loading models")
 
-tfidf = pickle.load(open("tfidf.pkl", "rb"))
+tfidf = pickle.load(open("tfidf-2048.pkl", "rb"))
 svd = pickle.load(open("svd.pkl", "rb"))
 lr = pickle.load(open("lr.pkl", "rb"))
 
