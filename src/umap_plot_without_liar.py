@@ -27,12 +27,18 @@ y_train = df["type"]
 #y_train are the labels, "politics", "sports", etc.
 # Fit umap
 print("fitting umap")
-reducer = umap.UMAP(random_state=42, n_neighbors=25, min_dist=0.1, n_components=2)
-embedding = reducer.fit_transform(X_train)
+try:
+    reducer = pickle.load(open("umap.pkl", "wb"))
+    embedding = reducer.transform(X_train)
+except:
+    reducer = umap.UMAP(random_state=42, n_neighbors=25, min_dist=0.1, n_components=2)
+    embedding = reducer.fit_transform(X_train)
+    pickle.dump(reducer, open("umap.pkl", "wb"))
+
+
 print("done fitting umap")
 # Replace each label in y_train with a number
 classes = y_train.unique()
-classes.remove(None)
 
 # Assign each class a number
 target = np.zeros(y_train.shape, dtype=int)
@@ -47,7 +53,7 @@ colours = ["yellow", # Rumor
            "orange", # Biased
            "#666040", # None
            "orange", # Unrealiable
-           "black", # Hate
+           "#6600ff", # Hate
            "cyan", # Conspiracy
            "grey", # Clickbait
            "purple", # Satirical
