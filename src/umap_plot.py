@@ -31,7 +31,7 @@ X_train = svd.transform(tfidf.transform(df["tokens"]))
 # Fit umap
 print("fitting umap")
 try:
-    reducer = pickle.load(open("umap.pkl", "wb"))
+    reducer = pickle.load(open("umap.pkl", "rb"))
 except:
     reducer = umap.UMAP(random_state=42, n_neighbors=25, min_dist=0.1, n_components=2)
     reducer.fit_transform(X_train)

@@ -28,7 +28,7 @@ y_train = df["type"]
 # Fit umap
 print("fitting umap")
 try:
-    reducer = pickle.load(open("umap.pkl", "wb"))
+    reducer = pickle.load(open("umap.pkl", "rb"))
     embedding = reducer.transform(X_train)
 except:
     reducer = umap.UMAP(random_state=42, n_neighbors=25, min_dist=0.1, n_components=2)
