@@ -1,0 +1,25 @@
+\section{Data pipeline}
+\subsubsection{What features to focus on}
+We chose to only be concerned with the "content" column for the base from which we want to predict the type. Whilst it
+might be tempting to also include features such as "domain" as input, we found that this leads to massive over-fitting,
+primarily because the dataset is constructed by labeling articles as true or false based on their domain (i.e. all
+articles from the Washington Post being labeled true, versus all from Fox News being labeled as false) (**REF**).
+\subsubsection{Grouping}
+Whilst it is possible to use logistic regression for multi-class classification, we are in this case only interested in
+a binary scenario of "fake news" or "reliable news". We therefore decided to encode the "type" of the article into 1's
+and 0's, such that \textit{reliable} is encoded as 1 and the rest is encoded as 0. We've chosen this rather
+conservative approach to what counts as reliable (ex. excluding "political" articles from being reliable), because it
+would be of greater ethical concern if we labelled a fake article as true by mistake versus labeling a true article
+fake by mistake.
+
+\subsubsection{TF-IDF feature extraction}
+In order to extract useful features from the content column, we decided to run it through a TF-IDF (Term
+Frequency - Inverse Document Frequency) model in order to identify the importance of different words for predicting
+wether an article was reliable or not. We can then use the weights gained through the TF-IDF model as our input vector
+in our logistic regression model. \todo{Maybe add the math behind TF-IDF and / or potentially the tokenization we did}
+
+\subsubsection{Dimensionality reduction through Truncated Singular Value Decomposition}
+After running the content through the TF-IDF model, we were left with a rather large input vector with a dimensionality
+of 2048***
+\todo{Correct?}. In order to consolidate similar features together, and to improve the performance we reduced the
+dimensionality of our input using truncated singular value decomposition (REF) \todo{Remember to add reference}.

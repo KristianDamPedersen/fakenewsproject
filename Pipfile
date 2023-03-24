@@ -5,6 +5,21 @@ name = "pypi"
 
 [packages]
 pytest = "*"
+pandas = "*"
+requests = "*"
+xgboost = "*"
+dask = {extras = ["distributed"], version = "*"}
+nltk = "*"
+graphviz = "*"
+pyarrow = "*"
+dask-ml = "*"
+fastparquet = "*"
+matplotlib = "*"
+spacy = "*"
+sentence-transformers = "*"
+jupyter = "*"
+torch = "*"
+gensim = "*"
 
 [dev-packages]
 
