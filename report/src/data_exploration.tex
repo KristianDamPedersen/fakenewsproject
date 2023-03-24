@@ -1,0 +1,58 @@
+\section{Data Exploration}
+\subsection{Sample data}
+We downloaded the sample data and loaded it into a pandas dataframe, which did not pose any challenges. 
+We then performed tokenization, stopword removal, lowercasing and stemming (see notebook for details). Our processing revealed:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{r| c | c | c| c}
+      Data& vocabulary size & vocabulary size (lowered) & \% decrease & \% decrease (lowered)\\
+        \hline
+      Sample data& 21016 & 18011 & 0\% & 0\% \\
+    \hline
+      Removed stopwords & 20674 & 17865 & 1.63\% & 0.81\% \\
+    \hline
+      Stemmed & 12654 & 12703 & 39.8\% & 29.5\%
+    \end{tabular}
+\end{table}
+% TODO ADD THESE NUMBERS TO TABLE
+
+\label{sec:headings}
+\subsection{Getting the data}
+The first challenge was simply downloading and unpacking the files on our Linux systems. Using different GUI tools failed, and in the end, the method that worked was simply concatinating the files into a temporary zip file using \texttt{cat}, and then unzipping the combined file using \texttt{unzip}.\\
+\\
+Trying to read the data in python proved to be a challenging task, as the .csv file seemed to be corrupted or malformed with rows containing different amounts of columns. After some manual exploration, we found the problem which turned out to be carriage returns. Some article content included \texttt{\textbackslash r}, which was interpreted as "newline", and thus, a new row in the middle of arbitrary news content. A single command '\texttt{sed 's/\textbackslash r/ /g' in.csv > out.csv}' replacing the carriage returns with spaces (to preserve word boundaries) turned out to solve this issue.\\
+
+\subsection{Working with larger than memory datasets}
+One of the main hurdles to overcome when gathering and processing the data, was the fact that the dataset was larger
+than our available RAM. This prevented us from loading all of the dataset into memory (as required if using Pandas
+dataframes) at any one time. To overcome this limitation we chose to first revise the format of our data. We decided to
+convert the large CSV file into the more managable \textit{parquet} format (see jupyter notebook for conversion script). The advantage of parquet files, is that they
+come with detailed associated meta-data. In the meta-data we were able to split our dataset into chunks, which we could
+then use to sequentially load the dataset into memory in bytes, and put it back together correctly.
+
+Pandas unfortunately doesn't support this sequential streaming into memory, so we decided to switch to a library called
+\textit{Dask}. Dask is designed around working with larger than memory datasets, and leverage an advanced scheduler to both
+enable chunk-based operations, lazy calculations and even multithreading and distributing work across computers. This makes working with large data much easier.
+\subsection{Processing with Dask}
+Things to describe:
+\begin{itemize}
+    \item Tokenize the text.
+    \item Remove stopwords and compute the size of the vocabulary. Compute the reduction rate of the vocabulary size after removing stopwords.
+    \item Remove word variations with stemming and compute the size of the vocabulary. Compute the reduction rate of the vocabulary size after stemming.
+\end{itemize}
+    
+    
+    
+
+\subsection{Some non-trivial observations}
+When exploring our data, we found the following problems:
+\subsubsection{Carriage returns}
+As previously mentioned, before the csv was even usable, we had to remove carriage returns from the news content.
+\subsubsection{Wikileaks}
+While manually inspecting the data, we randomly noticed two articles containing the same source
+\begin{quote}
+    \textit{Tor}
+
+    \textit{Tor is an encrypted anonymising network that makes it harder to} [\dots]\\
+
+\end{quote}
