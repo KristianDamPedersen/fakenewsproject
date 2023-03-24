@@ -1,4 +1,5 @@
 \section{Data pipeline}
+\todo{Missing meta section}
 \subsubsection{What features to focus on}
 We chose to only be concerned with the "content" column for the base from which we want to predict the type. Whilst it
 might be tempting to also include features such as "domain" as input, we found that this leads to massive over-fitting,
@@ -11,6 +12,8 @@ and 0's, such that \textit{reliable} is encoded as 1 and the rest is encoded as 
 conservative approach to what counts as reliable (ex. excluding "political" articles from being reliable), because it
 would be of greater ethical concern if we labelled a fake article as true by mistake versus labeling a true article
 fake by mistake.
+
+\todo{Tokenization section, remember unigrams vs bigrams}
 
 \subsubsection{TF-IDF feature extraction}
 In order to extract useful features from the content column, we decided to run it through a TF-IDF (Term
