@@ -14,8 +14,10 @@ Currently:
 
 ### Complex model: 
 Currently: 
-* (Jakup has a NN)
+* Jakup has created a neural network (with 97% accuracy).
+*
 
 
 ### To Do:
 - [] Part 1: Task 2 (+ 1) finished (visualization and some data exploration)
+- [] Find some visualization and conceptual explanations to TF-IDF , SVD and MLP.
