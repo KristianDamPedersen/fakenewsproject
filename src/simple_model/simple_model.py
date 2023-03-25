@@ -3,6 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.linear_model import LogisticRegression
 from custom_tokeniser import custom_tokenizer
+from sklearn.metrics import classification_report
 import pickle
 def pass_fun(doc):
     return doc
@@ -44,5 +45,6 @@ X_test = df_test["tokens"]
 y_test = df_test["class"]
 
 X_test = svd.transform(tfidf.transform(X_test))
-score = lr.score(X_test, y_test)
-print(score)
+y_pred = lr.predict(X_test)
+
+print(classification_report(y_test, y_pred))
