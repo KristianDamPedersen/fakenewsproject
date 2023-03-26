@@ -1,2 +1,6 @@
 *
+
+!*.py
+!*.pkl
+!*.sh
 !.gitignore
