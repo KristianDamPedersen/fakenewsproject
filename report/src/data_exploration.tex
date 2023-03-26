@@ -3,9 +3,42 @@
   In this section we should discuss our initial experiences with the data. So how we managed to load it in, some general
   observations and some non-trivial observations. (So up to when we started actually applying processing to the data.)
 }
-\subsection{Sample data}
-We downloaded the sample data and loaded it into a pandas dataframe, which did not pose any challenges. 
-We then performed tokenization, stopword removal, lowercasing and stemming (see notebook for details). Our processing revealed:
+
+\subsection{Getting the data}
+The first challenge was simply downloading and unpacking the files on our Linux systems. Using different GUI tools failed, and in the end, the method that worked was simply concatinating the files into a temporary zip file using \texttt{cat}, and then unzipping the combined file using \texttt{unzip}.\\
+\\
+Trying to read the data in python proved to be a challenging task, as the .csv file seemed to be corrupted or malformed with rows containing different amounts of columns. After some manual exploration, we found the problem which turned out to be carriage returns. Some article content included \texttt{\textbackslash r}, which was interpreted as "newline", and thus, a new row in the middle of arbitrary news content. A single command '\texttt{sed 's/\textbackslash r/ /g' in.csv > out.csv}' replacing the carriage returns with spaces (to preserve word boundaries) turned out to solve this issue.\\
+\todo{Perhaps missing a section on summary statistics?}
+
+After getting the data into readable CSV file, we decided to load it into a SQL database for easier handling and
+exploration.
+
+\subsection{Larger than memory datasets}
+Due to the size of our dataset, we had to use different methods for handling our data despite it being larger than
+memory. Throughout this report we used 3 different methods: SQL Databases, chunk-wise operations and brute force (acces
+to a large enough server). After getting the data into a readable CSV file in the previous step, we decided to load it
+into an SQL database for easier handling and exploration. In later sections we will use the other two methods as they
+are more appropriate for specific machine learning tasks.
+
+\subsubsection{Summary of the dataset}
+Here is main bulletpoints of the data.
+
+\begin{enumerate}
+  \item The dataset contains \textbf{XXX} articles.
+  \item The articles are sorted into the following categories:
+  \item The number of articles in each category is distributed like so: \textbf{DISTRIBUTION GRAPH}
+\end{enumerate}
+
+\subsubsection{Vocabulary sizes}
+After getting the data into a managable format, we where then able to start properly exploring it. The first thing we
+did was to calculate the vocabulary size of the dataset. We did this by first tokenizing the data, and then counting the
+unique tokens. We then repeated this process after removing stopwords, and finally after stemming the tokens. The
+results are shown in table \ref{tab:vocab_sizes}. As we can see the vocabulary decreases slightly after removing
+stopwords, and significantly after stemming. This is expected, since stopwords are a list of (relatively few) very
+common words, which is why it doesn't affect the vocabulary size much. However the major decrease after stemming makes
+sense, as stemming reduces the number of unique tokens by grouping together words with the same root.
+
+
 \begin{table}[h]
     \centering
     \begin{tabular}{r| c | c | c| c}
@@ -17,50 +50,32 @@ We then performed tokenization, stopword removal, lowercasing and stemming (see 
     \hline
       Stemmed & 12654 & 12703 & 39.8\% & 29.5\%
     \end{tabular}
+    \caption{Vocabulary sizes}
+    \label{tab:vocab_sizes}
 \end{table}
+
 % TODO ADD THESE NUMBERS TO TABLE
 
-\label{sec:headings}
-\subsection{Getting the data}
-The first challenge was simply downloading and unpacking the files on our Linux systems. Using different GUI tools failed, and in the end, the method that worked was simply concatinating the files into a temporary zip file using \texttt{cat}, and then unzipping the combined file using \texttt{unzip}.\\
-\\
-Trying to read the data in python proved to be a challenging task, as the .csv file seemed to be corrupted or malformed with rows containing different amounts of columns. After some manual exploration, we found the problem which turned out to be carriage returns. Some article content included \texttt{\textbackslash r}, which was interpreted as "newline", and thus, a new row in the middle of arbitrary news content. A single command '\texttt{sed 's/\textbackslash r/ /g' in.csv > out.csv}' replacing the carriage returns with spaces (to preserve word boundaries) turned out to solve this issue.\\
-\todo{Perhaps missing a section on summary statistics?}
-\subsection{Working with larger than memory datasets}
-One of the main hurdles to overcome when gathering and processing the data, was the fact that the dataset was larger
-than our available RAM. This prevented us from loading all of the dataset into memory (as required if using Pandas
-dataframes) at any one time. To overcome this limitation we chose to first revise the format of our data. We decided to
-convert the large CSV file into the more managable \textit{parquet} format (see jupyter notebook for conversion script). The advantage of parquet files, is that they
-come with detailed associated meta-data. In the meta-data we were able to split our dataset into chunks, which we could
-then use to sequentially load the dataset into memory in bytes, and put it back together correctly.
 
-Pandas unfortunately doesn't support this sequential streaming into memory, so we decided to switch to a library called
-\textit{Dask}. Dask is designed around working with larger than memory datasets, and leverage an advanced scheduler to both
-enable chunk-based operations, lazy calculations and even multithreading and distributing work across computers. This makes working with large data much easier.
-\subsection{Processing with Dask}
-\todo{Since we never used Dask this section (as well as the one with working with larger than memory data), should be
-rewritten to reflect what we actually did.}
-Things to describe:
-\begin{itemize}
-    \item Tokenize the text.
-    \item Remove stopwords and compute the size of the vocabulary. Compute the reduction rate of the vocabulary size after removing stopwords.
-    \item Remove word variations with stemming and compute the size of the vocabulary. Compute the reduction rate of the vocabulary size after stemming.
-\end{itemize}
-    
-    
-    
-
-\subsection{Some non-trivial observations}
-\todo{This section definetly needs expanding, our non-trivial observations where: WikiLeaks, Pr. Domain, + something
-extra }
-When exploring our data, we found the following problems:
-\subsubsection{Carriage returns}
-As previously mentioned, before the csv was even usable, we had to remove carriage returns from the news content.
-\subsubsection{Wikileaks}
-While manually inspecting the data, we randomly noticed two articles containing the same source
+\subsubsection{Classifiyng truth per. domain}
+One important aspect in the dataset, is how it classifies a news articles into the categories. The creators of the
+dataset has chosen to classify the articles per domain, meaning that all the articles from any given domain will be
+given the same level of credibility. Ignoring the ethical implications, this meant that we quite quickly realised that
+we had to exclude domain from any of our training, as the model would quickly just use the domain only for
+classification.
+\subsubsection{Duplicated articles}
+Another things we realised quite quickly, is that the dataset contains a significant amount of duplicated articles as
+seen in table \textbf{TABLE}. As we can see, this is due to different popups that the webscraper has encountered as it
+was trying to scrape the dataset, such as the \textbf{NUMBER} articles from Wikileaks all sharing:
 \begin{quote}
     \textit{Tor}
 
     \textit{Tor is an encrypted anonymising network that makes it harder to} [\dots]\\
 
 \end{quote}
+These duplicated articles were simply removed before we trained our model.
+
+\subsubsection{UMAP exploration}
+\todo{Josh, i need you here}
+
+
