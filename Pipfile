@@ -21,6 +21,7 @@ torch = "*"
 gensim = "*"
 mysql-connector = "*"
 black = {extras = ["jupyter"], version = "*"}
+tensorflow = "*"
 
 [dev-packages]
 
