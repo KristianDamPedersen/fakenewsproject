@@ -4,8 +4,12 @@ from sklearn.decomposition import TruncatedSVD
 from custom_tokeniser import custom_tokenizer
 import pickle
 from xgboost import XGBClassifier
+
+
 def pass_fun(doc):
     return doc
+
+
 xgb = XGBClassifier()
 try:
     print("loading pretrained models")
@@ -20,14 +24,15 @@ except:
 
     print(y_train.value_counts())
 
-
-    tfidf = TfidfVectorizer(max_features=4096, sublinear_tf=True, preprocessor=pass_fun, tokenizer=pass_fun)
+    tfidf = TfidfVectorizer(
+        max_features=4096, sublinear_tf=True, preprocessor=pass_fun, tokenizer=pass_fun
+    )
 
     X_train = tfidf.fit_transform(X_train)
     print("saving tfidf model")
     pickle.dump(tfidf, open("pickles/tfidf-xgb.pkl", "wb"))
 
-    svd = TruncatedSVD(n_components=386, random_state = 42)
+    svd = TruncatedSVD(n_components=386, random_state=42)
     X_train = svd.fit_transform(X_train)
     print("saving svd model")
     pickle.dump(svd, open("pickles/svd-xgb.pkl", "wb"))

@@ -6,8 +6,10 @@ import matplotlib.patches as mpatches
 import pickle
 from custom_tokeniser import custom_tokenizer
 
+
 def pass_fun(doc):
     return doc
+
 
 print("loading models")
 
@@ -24,7 +26,7 @@ df = df.groupby("type").head(12000)
 
 X_train = svd.transform(tfidf.transform(df["tokens"]))
 y_train = df["type"]
-#y_train are the labels, "politics", "sports", etc.
+# y_train are the labels, "politics", "sports", etc.
 # Fit umap
 print("fitting umap")
 try:
@@ -45,24 +47,29 @@ target = np.zeros(y_train.shape, dtype=int)
 for i, c in enumerate(classes):
     target[y_train == c] = i
 
-colours = ["yellow", # Rumor
-           "black", # Political
-           "blue", # Junk science
-           "green", # RELIABLE
-           "red", # Fake
-           "orange", # Biased
-           "#666040", # Unrealiable
-           "#6600ff", # Hate
-           "cyan", # Conspiracy
-           "grey", # Clickbait
-           "purple", # Satirical
-           "#ff00ff"] # Liar Data (All classes)
+colours = [
+    "yellow",  # Rumor
+    "black",  # Political
+    "blue",  # Junk science
+    "green",  # RELIABLE
+    "red",  # Fake
+    "orange",  # Biased
+    "#666040",  # Unrealiable
+    "#6600ff",  # Hate
+    "cyan",  # Conspiracy
+    "grey",  # Clickbait
+    "purple",  # Satirical
+    "#ff00ff",
+]  # Liar Data (All classes)
 # Plot
-plt.scatter(*embedding.T, c=[colours[i] for i in target], s=0.05, alpha=0.25, marker=",", lw=0)
+plt.scatter(
+    *embedding.T, c=[colours[i] for i in target], s=0.05, alpha=0.25, marker=",", lw=0
+)
 
-plt.legend(handles = [mpatches.Patch(color=colours[i], label=classes[i]) for i in range(len(classes))])
+plt.legend(
+    handles=[
+        mpatches.Patch(color=colours[i], label=classes[i]) for i in range(len(classes))
+    ]
+)
 
 plt.savefig("WOLiar.png", dpi=3600)
-
-
-

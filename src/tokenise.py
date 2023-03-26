@@ -5,13 +5,13 @@ from multiprocessing import Pool
 import pandas as pd
 import glob
 
+
 def tokenise_parquet(parquet_file):
     print(f"Reading {parquet_file}")
     df = pd.read_parquet(parquet_file)
-    df['tokens'] = df['content'].apply(custom_tokenizer)
+    df["tokens"] = df["content"].apply(custom_tokenizer)
     df.to_parquet(parquet_file)
     print(f"Finished writing {parquet_file}")
-    
 
 
 if __name__ == "__main__":

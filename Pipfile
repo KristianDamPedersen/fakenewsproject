@@ -21,6 +21,7 @@ jupyter = "*"
 torch = "*"
 gensim = "*"
 mysql-connector = "*"
+black = {extras = ["jupyter"], version = "*"}
 
 [dev-packages]
 

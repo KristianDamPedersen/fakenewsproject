@@ -5,8 +5,12 @@ from sklearn.linear_model import LogisticRegression
 from custom_tokeniser import custom_tokenizer
 from sklearn.metrics import classification_report
 import pickle
+
+
 def pass_fun(doc):
     return doc
+
+
 try:
     print("loading pretrained models")
     tfidf = pickle.load(open("./pickles/tfidf-2048.pkl", "rb"))
@@ -20,14 +24,15 @@ except:
 
     print(y_train.value_counts())
 
-
-    tfidf = TfidfVectorizer(max_features=2048, sublinear_tf=True, preprocessor=pass_fun, tokenizer=pass_fun)
+    tfidf = TfidfVectorizer(
+        max_features=2048, sublinear_tf=True, preprocessor=pass_fun, tokenizer=pass_fun
+    )
 
     X_train = tfidf.fit_transform(X_train)
     print("saving tfidf model")
     pickle.dump(tfidf, open("pickles/tfidf-2048.pkl", "wb"))
 
-    svd = TruncatedSVD(n_components=256, random_state = 42)
+    svd = TruncatedSVD(n_components=256, random_state=42)
     X_train = svd.fit_transform(X_train)
     print("saving svd model")
     pickle.dump(svd, open("pickles/svd-256.pkl", "wb"))
