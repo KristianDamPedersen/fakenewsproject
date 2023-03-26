@@ -28,20 +28,9 @@
         devShells.default = with pkgs;
           mkShell {
             nativeBuildInputs = [
-              #autoreconfHook
-              #backblaze-b2
-              #cargo
-              #curl
-              #docker
-              #docker-compose
-              #git
-              #nodejs
+              # Add layout_pipenv to .envrc
               pipenv
               #python310
-              #rustc
-              #yarn
-
-              #nodePackages.prettier
             ];
 
             LD_LIBRARY_PATH = lib.makeLibraryPath [ stdenv.cc.cc 
