@@ -13,12 +13,12 @@ def pass_fun(doc):
 
 try:
     print("loading pretrained models")
-    tfidf = pickle.load(open("./pickles/tfidf-2048.pkl", "rb"))
-    svd = pickle.load(open("./pickles/svd-256.pkl", "rb"))
-    lr = pickle.load(open("./pickles/logreg.pkl", "rb"))
+    tfidf = pickle.load(open("data/tfidf-2048.pkl", "rb"))
+    svd = pickle.load(open("data/svd-256.pkl", "rb"))
+    lr = pickle.load(open("data/logreg.pkl", "rb"))
 except:
     print("models not found, fitting new model")
-    df = pd.read_parquet("small_train.parquet", columns=["tokens", "class"])
+    df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"], engine="fastparquet")
     X_train = df["tokens"]
     y_train = df["class"]
 
@@ -31,23 +31,23 @@ except:
     print("fitting TF-IDF")
     X_train = tfidf.fit_transform(X_train)
     print("saving tfidf model")
-    pickle.dump(tfidf, open("pickles/tfidf-2048.pkl", "wb"))
+    pickle.dump(tfidf, open("data/tfidf-2048.pkl", "wb"))
 
     print("fitting SVD")
     svd = TruncatedSVD(n_components=256, random_state=42)
     X_train = svd.fit_transform(X_train)
     print("saving svd model")
-    pickle.dump(svd, open("pickles/svd-256.pkl", "wb"))
+    pickle.dump(svd, open("data/svd-256.pkl", "wb"))
 
     print("fitting logistic regressor")
     lr = LogisticRegression(random_state=42)
     lr.fit(X_train, y_train)
 
     print("saving logistic regressor model")
-    pickle.dump(lr, open("pickles/logreg.pkl", "wb"))
+    pickle.dump(lr, open("data/logreg.pkl", "wb"))
     print("finished fitting models")
 
-df_test = pd.read_parquet("test.parquet")
+df_test = pd.read_parquet("data/test.parquet")
 
 X_test = df_test["tokens"]
 y_test = df_test["class"]
