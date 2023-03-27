@@ -44,10 +44,12 @@ except:
         max_features=4096, sublinear_tf=True, preprocessor=pass_fun, tokenizer=pass_fun
     )
 
+    print("fitting tfidf")
     X_train = tfidf.fit_transform(X_train)
     print("saving tfidf model")
     pickle.dump(tfidf, open("data/tfidf-dnn.pkl", "wb"))
 
+    print("fitting svd")
     svd = TruncatedSVD(n_components=384, random_state=42)
     X_train = svd.fit_transform(X_train)
     print("saving svd model")

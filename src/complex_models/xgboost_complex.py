@@ -13,12 +13,12 @@ def pass_fun(doc):
 xgb = XGBClassifier()
 try:
     print("loading pretrained models")
-    tfidf = pickle.load(open("./pickles/tfidf-xgb.pkl", "rb"))
-    svd = pickle.load(open("./pickles/svd-xgb.pkl", "rb"))
+    tfidf = pickle.load(open("data/tfidf-4096.pkl", "rb"))
+    svd = pickle.load(open("data/svd-384.pkl", "rb"))
     xgb.load_model("xgb.json")
 except:
     print("models not found, fitting new model")
-    df = pd.read_parquet("small_train.parquet", columns=["tokens", "class"])
+    df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"])
     X_train = df["tokens"]
     y_train = df["class"]
 
@@ -30,20 +30,20 @@ except:
 
     X_train = tfidf.fit_transform(X_train)
     print("saving tfidf model")
-    pickle.dump(tfidf, open("pickles/tfidf-xgb.pkl", "wb"))
+    pickle.dump(tfidf, open("data/tfidf-4096.pkl", "wb"))
 
-    svd = TruncatedSVD(n_components=386, random_state=42)
+    svd = TruncatedSVD(n_components=384, random_state=42)
     X_train = svd.fit_transform(X_train)
     print("saving svd model")
-    pickle.dump(svd, open("pickles/svd-xgb.pkl", "wb"))
+    pickle.dump(svd, open("data/svd-384.pkl", "wb"))
 
     xgb.fit(X_train, y_train)
 
     print("saving xgb model")
-    xgb.save_model("xgb.json")
+    xgb.save_model("data/xgb.json")
     print("finished fitting models")
 
-df_test = pd.read_parquet("test.parquet")
+df_test = pd.read_parquet("data/test.parquet")
 
 X_test = df_test["tokens"]
 y_test = df_test["class"]
