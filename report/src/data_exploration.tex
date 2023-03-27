@@ -8,7 +8,7 @@
 The first challenge was simply downloading and unpacking the files on our Linux systems. Using different GUI tools failed, and in the end, the method that worked was simply concatinating the files into a temporary zip file using \texttt{cat}, and then unzipping the combined file using \texttt{unzip}.\\
 \\
 Trying to read the data in python proved to be a challenging task, as the .csv file seemed to be corrupted or malformed with rows containing different amounts of columns. After some manual exploration, we found the problem which turned out to be carriage returns. Some article content included \texttt{\textbackslash r}, which was interpreted as "newline", and thus, a new row in the middle of arbitrary news content. A single command '\texttt{sed 's/\textbackslash r/ /g' in.csv > out.csv}' replacing the carriage returns with spaces (to preserve word boundaries) turned out to solve this issue.\\
-\todo{Perhaps missing a section on summary statistics?}
+% \todo{Perhaps missing a section on summary statistics?}
 
 After getting the data into readable CSV file, we decided to load it into a SQL database for easier handling and
 exploration.
@@ -19,6 +19,7 @@ memory. Throughout this report we used 3 different methods: SQL Databases, chunk
 to a large enough server). After getting the data into a readable CSV file in the previous step, we decided to load it
 into an SQL database for easier handling and exploration. In later sections we will use the other two methods as they
 are more appropriate for specific machine learning tasks.
+
 
 \subsubsection{Summary of the dataset}
 Here is main bulletpoints of the data.
