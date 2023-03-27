@@ -5,7 +5,6 @@ from custom_tokeniser import custom_tokenizer
 import pickle
 from xgboost import XGBClassifier
 
-
 def pass_fun(doc):
     return doc
 
@@ -15,7 +14,7 @@ try:
     print("loading pretrained models")
     tfidf = pickle.load(open("data/tfidf-4096.pkl", "rb"))
     svd = pickle.load(open("data/svd-384.pkl", "rb"))
-    xgb.load_model("xgb.json")
+    xgb.load_model("data/xgb.json")
 except:
     print("models not found, fitting new model")
     df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"])
