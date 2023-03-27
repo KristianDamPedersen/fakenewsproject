@@ -12,16 +12,19 @@ from sklearn.metrics import classification_report
 from multiprocessing import Pool
 import numpy as np
 
+
 def pass_fun(doc):
     return doc
 
+
 def parallel_apply(func, df, n_jobs=8):
     df_split = np.array_split(df, n_jobs)
-    pool=Pool(n_jobs)
+    pool = Pool(n_jobs)
     df = np.concatenate(pool.map(func, df_split))
     pool.close()
     pool.join()
     return df
+
 
 try:
     print("loading pretrained svd and tfidf")
@@ -29,7 +32,9 @@ try:
     svd = pickle.load(open("data/svd-dnn.pkl", "rb"))
 except:
     print("models not found, fitting new model")
-    df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"], engine="fastparquet")
+    df = pd.read_parquet(
+        "data/small_train.parquet", columns=["tokens", "class"], engine="fastparquet"
+    )
     X_train = df["tokens"]
     y_train = df["class"]
 
@@ -52,12 +57,15 @@ except:
 def transform(chunk):
     return svd.transform(tfidf.transform(chunk))
 
+
 try:
     dnn = load_model("data/smollboi1")
     print("Loaded tf model")
 except:
     print("loading df")
-    df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"], engine="fastparquet")
+    df = pd.read_parquet(
+        "data/small_train.parquet", columns=["tokens", "class"], engine="fastparquet"
+    )
 
     X_train = df["tokens"].to_numpy()
     y_train = df["class"].to_numpy()
@@ -67,21 +75,20 @@ except:
     print("loaded df")
 
     callback = tf.keras.callbacks.EarlyStopping(
-        monitor="loss",
-        patience=3,
-        restore_best_weights=True)
+        monitor="loss", patience=3, restore_best_weights=True
+    )
 
     dnn = Sequential()
-    dnn.add(Dense(384, input_dim=input_dim, activation='relu'))
+    dnn.add(Dense(384, input_dim=input_dim, activation="relu"))
     dnn.add(Dropout(0.2))
-    dnn.add(Dense(512, activation='relu'))
+    dnn.add(Dense(512, activation="relu"))
     dnn.add(Dropout(0.2))
-    dnn.add(Dense(512, activation='relu'))
+    dnn.add(Dense(512, activation="relu"))
     dnn.add(Dropout(0.2))
-    dnn.add(Dense(128, activation='relu'))
+    dnn.add(Dense(128, activation="relu"))
     dnn.add(Dropout(0.1))
-    dnn.add(Dense(16, activation='relu'))
-    dnn.add(Dense(1, activation='sigmoid'))
+    dnn.add(Dense(16, activation="relu"))
+    dnn.add(Dense(1, activation="sigmoid"))
 
     val_df = pd.read_parquet("data/val.parquet", columns=["tokens", "class"])
 
@@ -95,17 +102,17 @@ except:
     history = dnn.compile(
         loss="binary_crossentropy",
         optimizer=Adam(learning_rate=0.00075),
-        metrics=["accuracy"]
+        metrics=["accuracy"],
     )
 
     print("Fitting dnn")
     dnn.fit(
-        X_train, 
+        X_train,
         y_train,
         validation_data=(X_val, y_val),
         epochs=10,
         batch_size=256,
-        callbacks=[callback]
+        callbacks=[callback],
     )
 
 
@@ -122,4 +129,4 @@ acc = accuracy_score(y_pred, y_test)
 print(f"Accuracy {acc}")
 
 # >0.5 is used to make the valies of y_pred discrete since tensorflow spits them out in floats. This could be calibrated instead.
-print(classification_report(y_test, y_pred>0.5))
+print(classification_report(y_test, y_pred > 0.5))

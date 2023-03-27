@@ -6,9 +6,11 @@ from custom_tokeniser import custom_tokenizer
 from sklearn.metrics import classification_report
 import pickle
 
+
 # Does nothing, is used to pass through the custom tokenizer to the tfidf vectorizer.
 def pass_fun(doc):
     return doc
+
 
 # Load either the pretrained models or train new models
 try:
@@ -18,7 +20,9 @@ try:
     lr = pickle.load(open("data/logreg.pkl", "rb"))
 except:
     print("models not found, fitting new model")
-    df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"], engine="fastparquet")
+    df = pd.read_parquet(
+        "data/small_train.parquet", columns=["tokens", "class"], engine="fastparquet"
+    )
     X_train = df["tokens"]
     y_train = df["class"]
 
