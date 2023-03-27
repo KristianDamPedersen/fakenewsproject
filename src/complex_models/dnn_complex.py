@@ -28,8 +28,8 @@ def parallel_apply(func, df, n_jobs=8):
 
 try:
     print("loading pretrained svd and tfidf")
-    tfidf = pickle.load(open("data/tfidf-dnn.pkl", "rb"))
-    svd = pickle.load(open("data/svd-dnn.pkl", "rb"))
+    tfidf = pickle.load(open("data/tfidf-4096.pkl", "rb"))
+    svd = pickle.load(open("data/svd-384.pkl", "rb"))
 except:
     print("models not found, fitting new model")
     df = pd.read_parquet(
@@ -47,13 +47,13 @@ except:
     print("fitting tfidf")
     X_train = tfidf.fit_transform(X_train)
     print("saving tfidf model")
-    pickle.dump(tfidf, open("data/tfidf-dnn.pkl", "wb"))
+    pickle.dump(tfidf, open("data/tfidf-4096.pkl", "wb"))
 
     print("fitting svd")
     svd = TruncatedSVD(n_components=384, random_state=42)
     X_train = svd.fit_transform(X_train)
     print("saving svd model")
-    pickle.dump(svd, open("data/svd-dnn.pkl", "wb"))
+    pickle.dump(svd, open("data/svd-384.pkl", "wb"))
 
 
 def transform(chunk):
@@ -61,7 +61,7 @@ def transform(chunk):
 
 
 try:
-    dnn = load_model("data/smollboi1")
+    dnn = load_model("data/smollboi2")
     print("Loaded tf model")
 except:
     print("loading df")
@@ -116,8 +116,10 @@ except:
         batch_size=256,
         callbacks=[callback],
     )
+    print("saving model")
+    dnn.save("data/smollboi2")
 
-
+test_df = pd.read_parquet("data/test.parquet")
 test_df = pd.read_parquet("data/test.parquet")
 
 X_test = test_df["tokens"]
@@ -127,7 +129,7 @@ del test_df
 X_test = transform(X_test)
 
 y_pred = dnn.predict(X_test)
-acc = accuracy_score(y_pred, y_test)
+acc = accuracy_score(y_test, y_pred > 0.5)
 print(f"Accuracy {acc}")
 
 # >0.5 is used to make the valies of y_pred discrete since tensorflow spits them out in floats. This could be calibrated instead.
