@@ -29,7 +29,7 @@ try:
     svd = pickle.load(open("data/svd-dnn.pkl", "rb"))
 except:
     print("models not found, fitting new model")
-    df = pd.read_parquet("small_train.parquet", columns=["tokens", "class"], engine="fastparquet")
+    df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"], engine="fastparquet")
     X_train = df["tokens"]
     y_train = df["class"]
 
@@ -57,7 +57,7 @@ try:
     print("Loaded tf model")
 except:
     print("loading df")
-    df = pd.read_parquet("small_train.parquet", columns=["tokens", "class"], engine="fastparquet")
+    df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"], engine="fastparquet")
 
     X_train = df["tokens"].to_numpy()
     y_train = df["class"].to_numpy()
@@ -82,7 +82,7 @@ except:
     dnn.add(Dense(16, activation='relu'))
     dnn.add(Dense(1, activation='sigmoid'))
 
-    val_df = pd.read_parquet("val.parquet", columns=["tokens", "class"])
+    val_df = pd.read_parquet("data/val.parquet", columns=["tokens", "class"])
 
     print("loading val")
     X_val = val_df["tokens"].to_numpy()
@@ -108,7 +108,7 @@ except:
     )
 
 
-test_df = pd.read_parquet("test.parquet")
+test_df = pd.read_parquet("data/test.parquet")
 
 X_test = test_df["tokens"]
 y_test = test_df["class"]
@@ -120,4 +120,5 @@ y_pred = dnn.predict(X_test)
 acc = accuracy_score(y_pred, y_test)
 print(f"Accuracy {acc}")
 
+# >0.5 is used to make the valies of y_pred discrete since tensorflow spits them out in floats. This could be calibrated instead.
 print(classification_report(y_test, y_pred>0.5))

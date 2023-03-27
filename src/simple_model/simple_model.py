@@ -6,11 +6,11 @@ from custom_tokeniser import custom_tokenizer
 from sklearn.metrics import classification_report
 import pickle
 
-
+# Does nothing, is used to pass through the custom tokenizer to the tfidf vectorizer.
 def pass_fun(doc):
     return doc
 
-
+# Load either the pretrained models or train new models
 try:
     print("loading pretrained models")
     tfidf = pickle.load(open("data/tfidf-2048.pkl", "rb"))
