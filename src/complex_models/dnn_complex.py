@@ -70,6 +70,7 @@ except:
         monitor="loss",
         patience=3,
         restore_best_weights=True)
+
     dnn = Sequential()
     dnn.add(Dense(384, input_dim=input_dim, activation='relu'))
     dnn.add(Dropout(0.2))
