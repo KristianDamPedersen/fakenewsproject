@@ -1,17 +1,23 @@
 \section{Simple model: Logistic Regression (1/2 page)} 
-\todo{REWRITE!}
-In this section we go the logistic regression model we created, to serve as a baseline for comparison for the more
-complex model we discuss in section \ref{sec:complex_model}. We will go over how we prepared the data for the model,
-including grouping of article types, TFIDF feature extraction and dimensionality reduction. We will then go over the
-performance metrics we've chosen, as well as the specific hyper-parameters used in the model. Finally we will analyze
-the result and comment on potential shortcomings of the model. 
+For our baseline, we chose to use a logistic regression model. We chose logistic regression, as it serves as a
+relatively simple model to implement, but one that is still suited for classification and achieves good results on our
+dataset (see \textbf{REFERENCE}). Much of the heavy lifting in developing this model took place in the previous sections,
+so once we reached this step we chose to just use a relatively naive implementation, using the default values provided
+by \textit{scikit-learn}. This meant we had the following hyperparameters for our model:
 
-\subsection{Model}
-After preparing the data for training, we created our logistic regression model. When creating a logistic regression
-model, there are a few important hyper-parameters to consider. First we have the choice of solver. 
-\subsubsection{Hyper-parameters}
+\begin{enumerate}
+  \item \textbf{Penalty}: l2. This form of penalty adds a penatly that is equal to the square of the magnitude of the
+    coefficients of the model. In other words, it tries to limit the influence that any single coefficient has on the
+    model.
 
+  \item \textbf{Solver}: lbfgs (limited memory BFGS). This solver is especially useful on "smaller" datasets (such as
+    ours), both because it is quick to train, but also because it is memory efficient which helps us on limited
+    hardware.
+
+\end{enumerate}
 
 \subsection{Shortcomings}
+With simplicity also comes drawbacks. Compared to more complex models such as the DNN we will discuss in the next
+section, a logistic regression will lack sensitivity to the nuances in the dataset. However, it did perform admirably.
 
 

@@ -1,28 +1,43 @@
 \section{Data pipeline}
-\todo{Missing meta section}
+In this section we'll discuss the processing steps we applied to the data, after retrieving it and converting it to a
+useful format. This goes in addition to any steps taken in the previous section. 
+
 \subsubsection{What features to focus on}
-We chose to only be concerned with the "content" column for the base from which we want to predict the type. Whilst it
-might be tempting to also include features such as "domain" as input, we found that this leads to massive over-fitting,
-primarily because the dataset is constructed by labeling articles as true or false based on their domain (i.e. all
-articles from the Washington Post being labeled true, versus all from Fox News being labeled as false) (**REF**).
+For the models, we chose to primarily focus on the content of the articles as predictors for whether a given article is
+fake or not. Whilst we were tempted to include "domain" initially, after the discovery discussed in section \textbf{REF},
+we decided against We also chose to ignore the titles of the articles, as these where often simply reflections of the
+content. \todo{Correct?}
+
 \subsubsection{Grouping}
-Whilst it is possible to use logistic regression for multi-class classification, we are in this case only interested in
-a binary scenario of "fake news" or "reliable news". We therefore decided to encode the "type" of the article into 1's
-and 0's, such that \textit{reliable} is encoded as 1 and the rest is encoded as 0. We've chosen this rather
-conservative approach to what counts as reliable (ex. excluding "political" articles from being reliable), because it
-would be of greater ethical concern if we labelled a fake article as true by mistake versus labeling a true article
-fake by mistake.
+Whilst it is possible to use logistic regression for multi-class classification, we instead chose to build a binary
+classifier, that tries to establish wether an article is "reliable" or not. Because of our focus on the reliability of
+the article, we chose to encode all "reliable" articles as 1's, whilst the rest of the types ("fake", "bias", etc.) got
+encoded as 0's. With this approach we will be (perhaps unfairly) strict in our judgement of a given article, but we
+reason that it is better to accidentally label a reliable article as false, than it is to accidentally label a false
+article as reliable. \todo{Maybe we should include an appendix with alternative model results for hard classification of
+fake news?}
 
-\todo{Tokenization section, remember unigrams vs bigrams}
+\subsubsection{Splitting the dataset}
+At this point we start moving into territory where we need to split our data. So we decided to split our data into into
+a training, validation and testing set, with a 80-10-10 split.
 
-\subsubsection{TF-IDF feature extraction}
-In order to extract useful features from the content column, we decided to run it through a TF-IDF (Term
-Frequency - Inverse Document Frequency) model in order to identify the importance of different words for predicting
-wether an article was reliable or not. We can then use the weights gained through the TF-IDF model as our input vector
-in our logistic regression model. \todo{Maybe add the math behind TF-IDF and / or potentially the tokenization we did}
+\subsubsection{Tokenization}
+After filtering out duplicate articles ( \textbf{REFERECE TO PREVIOUS SECTION}), and deciding to focus on the content of
+the articles for our input, the next step was to tokenize the data. We tokenized the text by first splitting it into
+individual words, removing stop words and using lemmitization to further reduce the vocabulary by condensing words into
+base form.
 
-\subsubsection{Dimensionality reduction through Truncated Singular Value Decomposition}
-After running the content through the TF-IDF model, we were left with a rather large input vector with a dimensionality
-of 2048***
-\todo{Correct?}. In order to consolidate similar features together, and to improve the performance we reduced the
-dimensionality of our input using truncated singular value decomposition (REF) \todo{Remember to add reference}.
+\subsubsection{Feature extraction using TF-IDF}
+After treated the content column, we were then able to train a TF-IDF (Term Frequency - Inverse Document Frequency)
+model on it. This model looks at how often a given token (word) appears in an article, and compares it to how big that
+document is. By training this model, we essentially output a large vector, which we can use to encode the tokens into a
+large matrix that can be fed into our models.
+
+\subsubsection{Dimensionality reduction using Truncated Single Value Decomposition (SVD)}
+After encoding the data using our TF-IDF model, we were left with quite a large input space, which meant that it would
+be useful for us to reduce the dimensionality of our input matrix. In other words, we wanted to group similar elements
+(or flags) together, such that the models we build have a more clear delineation between inputs. To this we used
+truncated single value decomposition (SVD), that works by factoring a matrix with the hopes to extract most impactful
+elements of it.
+
+
