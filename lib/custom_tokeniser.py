@@ -20,5 +20,5 @@ def custom_tokenizer(text):
 
     lemmatizer = WordNetLemmatizer()
     lemmatized_words = [lemmatizer.lemmatize(word) for word in filtered_words]
-
     return lemmatized_words
+

@@ -29,7 +29,7 @@ parquet_train_dir = 'data/train.parquet/'
 parquet_small_train = 'small_train.parquet'
 tfidf_pickle = 'data/tfidf-4096.pkl'
 
-numpy_directory = 'complex_model/intermediate/'
+numpy_directory = 'data/intermediate/'
 modelfile = 'data/bigchungus'
 
 
