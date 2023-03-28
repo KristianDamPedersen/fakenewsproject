@@ -40,4 +40,25 @@ be useful for us to reduce the dimensionality of our input matrix. In other word
 truncated single value decomposition (SVD), that works by factoring a matrix with the hopes to extract most impactful
 elements of it.
 
+\subsubsection{Individual model differences}
+Whilst the above steps are broadly applicable to all the models we built, there was some individual differences on what
+steps and what hyperparameters each model was built with. These are seen in figure \ref{fig:pipeline}.
 
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=1\textwidth]{pipeline}
+  \caption{Pipeline}
+  \label{fig:pipeline}
+\end{figure}
+
+There were a few reasons for the differences:
+\begin{enumerate}
+  \item \textbf{Logistic regression}: For our simple model we initially set the TF-IDF and SVD parameters quite low. We
+    set our TF-IDF model to output a 2048 dimensional vector that get reduced to 256 dimensions through SVD.
+
+  \item \textbf{XGBoost and baseline DNN}: We suspected that the smaller dimensionality of our simple model, might
+    impact our results negatively, and since the models were fairly straight forward to train we choose to increase the
+    dimensionality such that our TF-IDF ouputted a 4096 dimensional vector, that then got reduced to 384 dimensions.
+
+  \item \textbf{Alternative DNN}
+\end{enumerate}
