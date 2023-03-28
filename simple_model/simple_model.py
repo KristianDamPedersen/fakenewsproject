@@ -2,15 +2,10 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.linear_model import LogisticRegression
-from custom_tokeniser import custom_tokenizer
+from lib.custom_tokeniser import custom_tokenizer
+from lib.pass_fun import pass_fun
 from sklearn.metrics import classification_report
 import pickle
-
-
-# Does nothing, is used to pass through the custom tokenizer to the tfidf vectorizer.
-def pass_fun(doc):
-    return doc
-
 
 # Load either the pretrained models or train new models
 try:

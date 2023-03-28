@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
-from custom_tokeniser import custom_tokenizer
+from lib.custom_tokeniser import custom_tokenizer
 import pickle
 import tensorflow as tf
 from tensorflow.keras.models import Sequential, load_model
@@ -10,21 +10,8 @@ from tensorflow.keras.optimizers import Adam
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from multiprocessing import Pool
+from lib.pass_fun import pass_fun
 import numpy as np
-
-
-def pass_fun(doc):
-    return doc
-
-
-def parallel_apply(func, df, n_jobs=8):
-    df_split = np.array_split(df, n_jobs)
-    pool = Pool(n_jobs)
-    df = np.concatenate(pool.map(func, df_split))
-    pool.close()
-    pool.join()
-    return df
-
 
 try:
     print("loading pretrained svd and tfidf")
