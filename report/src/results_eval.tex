@@ -13,16 +13,42 @@ the dataset.
 \textbf{TABLE HERE}
 \newline
 
+\begin{table}[htpb]
+  \centering
+  \caption{Model performance on FakeNewsCorpus dataset}
+  \label{tab:fakenewsperformance}
+
+  \begin{tabular}{c|cccc}
+    Model & Logistic Regression & Large DNN & Small DNN & XGBoost \\ \hline
+    Precision (Reliable / Unreliable) & 0.83 / 0.94 & Y & Z & A \\ \hline
+    Recall (Reliable / Unreliable) & 0.87 / 0.92 & Y & Z & A \\ \hline
+    F1-Score (Reliable / Unreliable) & 0.85 / 0.93 & Y & Z & A \\ \hline
+    Accuracy & ... & ... & ... & ... \\ \hline
+    Size & 16.6 MB & 121 MB & 34 MB & 29.8 MB 
+  \end{tabular}
+\end{table}
+
 \subsection{Generalisability and why the models are shit at LIAR}
 \todo{This is where we include Josh' magnificent visualizations!}
 However, whilst these results are impressive, they also hint that our models might be overfitted to our domain. This is
 likely due to the nature of the dataset we used for training not being general enough, which means a broader selection
 of data sources and data sets would be needed to achieve a more generalisable model. This issue is highlighted in
 particular by the relatively terrible accuracy acheived on the LIAR dataset as seen in table \textbf{TABLE REF}.
-\newline
 
-\textbf{TABLE HERE}
-\newline
+\begin{table}[htpb]
+  \centering
+  \caption{Model performance on LIAR dataset}
+  \label{tab:liarperformance}
+
+  \begin{tabular}{c|cccc}
+    Model & Logistic Regression & Large DNN & Small DNN & XGBoost \\ \hline
+    Precision & X & Y & Z & A \\ \hline
+    Recall & X & Y & Z & A \\ \hline
+    F1-Score & X & Y & Z & A \\ \hline
+    Accuracy & ... & ... & ... & ... \\ \hline
+  \end{tabular}
+\end{table}
+
 In addition to challenges regarding the available data, there are other challenges that any fake news classifier
 encounters as we will discuss next.
 
