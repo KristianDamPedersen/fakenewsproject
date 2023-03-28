@@ -1,13 +1,10 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
-from custom_tokeniser import custom_tokenizer
+from lib.custom_tokeniser import custom_tokenizer
 import pickle
 from xgboost import XGBClassifier
-
-def pass_fun(doc):
-    return doc
-
+from lib.pass_fun import pass_fun
 
 xgb = XGBClassifier()
 try:
