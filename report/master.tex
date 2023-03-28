@@ -8,19 +8,19 @@
 % keywords can be removed
 %\keywords{First keyword \and Second keyword \and More}
 
-\include{src/introduction}
+\input{src/introduction}
 
-\include{src/data_exploration}
+\input{src/data_exploration}
 
-\include{src/data_processing}
+\input{src/data_processing}
 
-\include{src/logistic_regression}
+\input{src/logistic_regression}
 
-\include{src/complex_model}
+\input{src/complex_model}
 
-\include{src/results_eval}
+\input{src/results_eval}
 
-\include{src/conclusion}
+\input{src/conclusion}
 
 
 
@@ -30,81 +30,81 @@
 %\url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
 % \end{center}
 
-Here is an example usage of the two main commands (\verb+citet+ and \verb+citep+): Some people thought a thing \citep{kour2014real, hadash2018estimate} but other people thought something else \citep{kour2014fast}. Many people have speculated that if we knew exactly why \citet{kour2014fast} thought this\dots
-
-\subsection{Figures}
-\lipsum[10]
-See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-\lipsum[11]
-
-\begin{figure}
-	\centering
-	\fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
-	\caption{Sample figure caption.}
-	\label{fig:fig1}
-\end{figure}
-
-\subsection{Tables}
-See awesome Table~\ref{tab:table}.
-
-The documentation for \verb+booktabs+ (`Publication quality tables in LaTeX') is available from:
-% \begin{center}
-	% \url{https://www.ctan.org/pkg/booktabs}
-% \end{center}
-
-
-\begin{table}
-	\caption{Sample table title}
-	\centering
-	\begin{tabular}{lll}
-		\toprule
-		\multicolumn{2}{c}{Part}                   \\
-		\cmidrule(r){1-2}
-		Name     & Description     & Size ($\mu$m) \\
-		\midrule
-		Dendrite & Input terminal  & $\sim$100     \\
-		Axon     & Output terminal & $\sim$10      \\
-		Soma     & Cell body       & up to $10^6$  \\
-		\bottomrule
-	\end{tabular}
-	\label{tab:table}
-\end{table}
-
-\subsection{Lists}
-\begin{itemize}
-	\item Lorem ipsum dolor sit amet
-	\item consectetur adipiscing elit.
-	\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
-\end{itemize}
-
-%%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
-\bibliographystyle{unsrtnat}
-\bibliography{references}  %%% Uncomment this line and comment out the ``thebibliography'' section below to use the external .bib file (using bibtex) .
-
-
-%%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
-% \begin{thebibliography}{1}
-
-% 	\bibitem{kour2014real}
-% 	George Kour and Raid Saabne.
-% 	\newblock Real-time segmentation of on-line handwritten arabic script.
-% 	\newblock In {\em Frontiers in Handwriting Recognition (ICFHR), 2014 14th
-% 			International Conference on}, pages 417--422. IEEE, 2014.
-
-% 	\bibitem{kour2014fast}
-% 	George Kour and Raid Saabne.
-% 	\newblock Fast classification of handwritten on-line arabic characters.
-% 	\newblock In {\em Soft Computing and Pattern Recognition (SoCPaR), 2014 6th
-% 			International Conference of}, pages 312--318. IEEE, 2014.
-
-% 	\bibitem{hadash2018estimate}
-% 	Guy Hadash, Einat Kermany, Boaz Carmeli, Ofer Lavi, George Kour, and Alon
-% 	Jacovi.
-% 	\newblock Estimate and replace: A novel approach to integrating deep neural
-% 	networks with existing applications.
-% 	\newblock {\em arXiv preprint arXiv:1804.09028}, 2018.
-
-% \end{thebibliography}
-
+%Here is an example usage of the two main commands (\verb+citet+ and \verb+citep+): Some people thought a thing \citep{kour2014real, hadash2018estimate} but other people thought something else \citep{kour2014fast}. Many people have speculated that if we knew exactly why \citet{kour2014fast} thought this\dots
+%
+%\subsection{Figures}
+%\lipsum[10]
+%See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
+%\lipsum[11]
+%
+%\begin{figure}
+%	\centering
+%	\fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
+%	\caption{Sample figure caption.}
+%	\label{fig:fig1}
+%\end{figure}
+%
+%\subsection{Tables}
+%See awesome Table~\ref{tab:table}.
+%
+%The documentation for \verb+booktabs+ (`Publication quality tables in LaTeX') is available from:
+%% \begin{center}
+%	% \url{https://www.ctan.org/pkg/booktabs}
+%% \end{center}
+%
+%
+%\begin{table}
+%	\caption{Sample table title}
+%	\centering
+%	\begin{tabular}{lll}
+%		\toprule
+%		\multicolumn{2}{c}{Part}                   \\
+%		\cmidrule(r){1-2}
+%		Name     & Description     & Size ($\mu$m) \\
+%		\midrule
+%		Dendrite & Input terminal  & $\sim$100     \\
+%		Axon     & Output terminal & $\sim$10      \\
+%		Soma     & Cell body       & up to $10^6$  \\
+%		\bottomrule
+%	\end{tabular}
+%	\label{tab:table}
+%\end{table}
+%
+%\subsection{Lists}
+%\begin{itemize}
+%	\item Lorem ipsum dolor sit amet
+%	\item consectetur adipiscing elit.
+%	\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
+%\end{itemize}
+%
+%%%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
+%\bibliographystyle{unsrtnat}
+%\bibliography{references}  %%% Uncomment this line and comment out the ``thebibliography'' section below to use the external .bib file (using bibtex) .
+%
+%
+%%%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
+%% \begin{thebibliography}{1}
+%
+%% 	\bibitem{kour2014real}
+%% 	George Kour and Raid Saabne.
+%% 	\newblock Real-time segmentation of on-line handwritten arabic script.
+%% 	\newblock In {\em Frontiers in Handwriting Recognition (ICFHR), 2014 14th
+%% 			International Conference on}, pages 417--422. IEEE, 2014.
+%
+%% 	\bibitem{kour2014fast}
+%% 	George Kour and Raid Saabne.
+%% 	\newblock Fast classification of handwritten on-line arabic characters.
+%% 	\newblock In {\em Soft Computing and Pattern Recognition (SoCPaR), 2014 6th
+%% 			International Conference of}, pages 312--318. IEEE, 2014.
+%
+%% 	\bibitem{hadash2018estimate}
+%% 	Guy Hadash, Einat Kermany, Boaz Carmeli, Ofer Lavi, George Kour, and Alon
+%% 	Jacovi.
+%% 	\newblock Estimate and replace: A novel approach to integrating deep neural
+%% 	networks with existing applications.
+%% 	\newblock {\em arXiv preprint arXiv:1804.09028}, 2018.
+%
+%% \end{thebibliography}
+%
 
 \end{document}
