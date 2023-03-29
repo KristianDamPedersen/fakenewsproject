@@ -22,6 +22,7 @@ gensim = "*"
 mysql-connector = "*"
 black = {extras = ["jupyter"], version = "*"}
 tensorflow = "*"
+umap-learn = "*"
 
 [dev-packages]
 

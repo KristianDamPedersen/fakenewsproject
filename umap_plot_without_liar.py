@@ -13,12 +13,12 @@ def pass_fun(doc):
 
 print("loading models")
 
-tfidf = pickle.load(open("tfidf-2048.pkl", "rb"))
-svd = pickle.load(open("svd.pkl", "rb"))
+tfidf = pickle.load(open("data/tfidf-2048.pkl", "rb"))
+svd = pickle.load(open("data/svd-256.pkl", "rb"))
 
 print("loading df")
 # Load the data
-df = pd.read_parquet("small_train.parquet", columns=["tokens", "type"])
+df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "type"])
 print("finished loading")
 
 # Try to grab 5000 of each type
@@ -30,12 +30,12 @@ y_train = df["type"]
 # Fit umap
 print("fitting umap")
 try:
-    reducer = pickle.load(open("umap.pkl", "rb"))
+    reducer = pickle.load(open("data/umap.pkl", "rb"))
     embedding = reducer.transform(X_train)
 except:
     reducer = umap.UMAP(random_state=42, n_neighbors=25, min_dist=0.1, n_components=2)
     embedding = reducer.fit_transform(X_train)
-    pickle.dump(reducer, open("umap.pkl", "wb"))
+    pickle.dump(reducer, open("data/umap.pkl", "wb"))
 
 
 print("done fitting umap")
