@@ -8,7 +8,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.decomposition import IncrementalPCA
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, roc_curve, roc_auc_score, auc
+import matplotlib.pyplot as plt
+
 from scipy.sparse import load_npz, save_npz
 from lib.pass_fun import pass_fun
 import tensorflow as tf
@@ -71,9 +73,9 @@ def transform(path):
         save_npz(os.path.join(numpy_directory, f'X_{filename}.npz'), X)
         np.save(os.path.join(numpy_directory, f'y_{filename}.npy'), y)
 
-transform(parquet_train_dir)
-transform(parquet_val_dir)
-transform(parquet_test_dir)
+#transform(parquet_train_dir)
+#transform(parquet_val_dir)
+#transform(parquet_test_dir)
 
 ##################### TRAIN ###############################
 # Load the training data
