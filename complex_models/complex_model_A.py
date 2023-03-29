@@ -133,7 +133,6 @@ except:
        
         
 ##################### PREDICT  ###################################
-
 batch_size = 8096*2
 # Load the test set files
 
@@ -143,6 +142,7 @@ test_label_files = sorted(glob.glob(numpy_directory+'y_'+step+'_*.npy'))
 
 y_pred = []
 y_true = []
+y_pred_binary = []
 
 # Make predictions on the test data
 for x_file, y_file in zip(test_files, test_label_files):
@@ -162,10 +162,14 @@ for x_file, y_file in zip(test_files, test_label_files):
         y_batch = y_test_chunk[start_idx:end_idx]
 
         # Get the predictions for this batch
-        y_pred_chunk = model.predict(X_batch)
+        #y_pred_chunk = model.predict(X_batch)
         
         # Since the output activation is sigmoid, we need to threshold the predictions
-        y_pred_chunk = (y_pred_chunk > 0.5).astype(int).flatten()
+        #y_pred_chunk = (y_pred_chunk > 0.5).astype(int).flatten()
+        y_pred_chunk = model.predict(X_batch).flatten()
+
+        y_pred_binary_chunk = (y_pred_chunk > 0.5).astype(int)
+        y_pred_binary.extend(y_pred_binary_chunk)
         
         y_pred.extend(y_pred_chunk)
         y_true.extend(y_batch)
@@ -173,4 +177,23 @@ for x_file, y_file in zip(test_files, test_label_files):
 # Calculate the accuracy
 print(f'classification report: biggus chungus, on {step} data')
 print('finished:', datetime.datetime.now())
-print(classification_report(y_true, y_pred))
+print(classification_report(y_true, y_pred_binary))
+
+# Calculate the ROC curve and AUC score
+fpr, tpr, _ = roc_curve(y_true, y_pred)
+roc_auc = auc(fpr, tpr)
+
+# Plot the ROC curve
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC (Complex model A)')
+plt.legend(loc="lower right")
+#plt.show()
+
+plt.savefig('figures/ROC_curve_complex_A.png')
+
