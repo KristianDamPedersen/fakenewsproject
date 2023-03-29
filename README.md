@@ -33,18 +33,18 @@ Here is an overview of our folder-structure:
   * README.md
   * meetings/
     * ...
-  * src/
-    * my_module/
-      * \_\_init\_\_.py
-      * my_module.py
-      * test_my_module.py
-      * my_module.md
-    * .../
+  * simple_model/
+    * simple_model.py
+  * complex_models/
+    * bigdnn_complex.py
+    * xgboost_complex.py
+    * dnn_complex.py
   * report/
     * preamble.tex
     * master.tex
     * report.pdf
-  * my_notebook.ipynb
+  * notebooks/
+    * ...
 
 ##### Managing modules 
 The */src* folder is designed to be the place where we keep all of our python modules, such that we can reuse our code across the project.
