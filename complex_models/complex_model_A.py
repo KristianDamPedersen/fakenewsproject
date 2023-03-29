@@ -15,6 +15,7 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
+import datetime
 
 
 # Initialize the TfidfVectorizer
@@ -27,16 +28,24 @@ parquet_test_dir = 'data/test.parquet/'
 parquet_val_dir = 'data/val.parquet/'
 parquet_train_dir = 'data/train.parquet/'
 parquet_small_train = 'small_train.parquet'
+
+
+#parquet_test_dir = 'test/'+parquet_test_dir # For debugging
+#parquet_val_dir = 'test/'+parquet_val_dir
+#parquet_train_dir = 'test/'+parquet_train_dir
+
+
 tfidf_pickle = 'data/tfidf-4096.pkl'
 
 numpy_directory = 'data/intermediate/'
-modelfile = 'data/bigchungus'
+modelfile = "data/biggus_chungus"
 
 
 # Fit TfidfVectorizer to a third of data
 print('Trying to read pickle...')
 try:
     tfidf_vectorizer = pickle.load(open(tfidf_pickle, "rb"))
+    print('Tf-idf pickle read!')
 except:
     print('pickle not found. Refitting vectoriser')
     df = pd.read_parquet(parquet_small_train, columns=['tokens'])
@@ -76,10 +85,10 @@ try:
 except:
     print('tf model not found. Training....')
 
-    # Determine the input dimension from the first training file
+    #Determine the input dimension from the first training file
     input_dim = load_npz(train_files[0]).shape[1]
-    
-    # Create a neural network model
+
+# Create a neural network model
     model = Sequential()
     model.add(Dense(1024, input_dim=input_dim, activation='relu'))
     model.add(Dropout(0.2))
@@ -91,44 +100,44 @@ except:
     model.add(Dropout(0.2))
     model.add(Dense(64, activation='relu'))
     model.add(Dense(1, activation='sigmoid'))
-    
-    # Compile the model
+
+# Compile the model
     model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.0005), metrics=['accuracy'])
-    
-    # Train the model incrementally using the saved training set files
+
+# Train the model incrementally using the saved training set files
     batch_size = 1536
     epochs = 2
-    
+
     for x_file, y_file in zip(train_files, train_label_files):
         print("training on", x_file, y_file)
         X_train_chunk = load_npz(x_file)
         y_train_chunk = np.load(y_file, allow_pickle=True).astype(int)
-    
+
         # Train the model in smaller batches
         num_samples = X_train_chunk.shape[0]
         num_batches = (num_samples + batch_size - 1) // batch_size
-    
+
         for epoch in range(epochs):
             print(f"Epoch {epoch + 1}/{epochs}")
             for batch_idx in range(num_batches):
                 start_idx = batch_idx * batch_size
                 end_idx = min((batch_idx + 1) * batch_size, num_samples)
-    
+
                 X_batch = X_train_chunk[start_idx:end_idx].todense()
                 y_batch = y_train_chunk[start_idx:end_idx]
-    
+
                 loss, acc = model.train_on_batch(X_batch, y_batch)
                 print(f" - Batch {batch_idx + 1}/{num_batches}: loss={loss:.4f}, accuracy={acc:.4f}")
                 
-    model.save(modelname)
-    
-    
+    model.save(modelfile)
+       
+        
 ##################### PREDICT  ###################################
 
 batch_size = 8096*2
 # Load the test set files
 
-step='val' # test or val
+step='test' # test or val
 test_files = sorted(glob.glob(numpy_directory+'X_'+step+'_*.npz'))
 test_label_files = sorted(glob.glob(numpy_directory+'y_'+step+'_*.npy'))
 
@@ -162,4 +171,6 @@ for x_file, y_file in zip(test_files, test_label_files):
         y_true.extend(y_batch)
 
 # Calculate the accuracy
+print(f'classification report: biggus chungus, on {step} data')
+print('finished:', datetime.datetime.now())
 print(classification_report(y_true, y_pred))
