@@ -1,1 +1,67 @@
 \section{Results and evaluation}
+In this section we will discuss the performance of both our simple and complex models, and discuss how these stack up
+against eachother. We will discuss the accuracy and performance on both the FakeNewsCorpus dataset and the LIAR
+dataset. And we will end of this evaluation by discussing the challenges in general fake news classifiers, and the
+ethical and practical challenges such a model encounters.
+
+\subsection{Relative performance on FakeNewsCorpus}
+Let's begin by looking at our models performance on the FakeNewsCorpus dataset. As we see from table \textbf{TABLE REF},
+both of our models performed admirably when being run against the test set, with our more complex DNN pulling ahead by
+about \textbf{x \%}. This can largely be contributed to the extra nuances that the complex model was able to detect in
+the dataset.
+\newline
+\textbf{TABLE HERE}
+\newline
+
+\begin{table}[htpb]
+  \centering
+  \caption{Model performance on FakeNewsCorpus dataset}
+  \label{tab:fakenewsperformance}
+
+  \begin{tabular}{c|cccc}
+    Model & Logistic Regression & Large DNN & Small DNN & XGBoost \\ \hline
+    Precision (Reliable / Unreliable) & 0.83 / 0.94 & 0.95 / 0.98 & Z & A \\ \hline
+    Recall (Reliable / Unreliable) & 0.87 / 0.92 & 0.95 / 0.98 & Z & A \\ \hline
+    F1-Score (Reliable / Unreliable) & 0.85 / 0.93 & 0.95 / 0.98 & Z & A \\ \hline
+    Accuracy f1-score & \textbf{...} & \textbf{0.97} & \textbf{...} & \textbf{...} \\ \hline
+    Size & 16.6 MB & 121 MB & 34 MB & 29.8 MB 
+  \end{tabular}
+\end{table}
+\todo{are sizes correct, and what do you think about summarizing with accuracy f1-score?}
+
+\subsection{Generalisability and why the models are shit at LIAR}
+\todo{This is where we include Josh' magnificent visualizations!}
+However, whilst these results are impressive, they also hint that our models might be overfitted to our domain. This is
+likely due to the nature of the dataset we used for training not being general enough, which means a broader selection
+of data sources and data sets would be needed to achieve a more generalisable model. This issue is highlighted in
+particular by the relatively terrible accuracy acheived on the LIAR dataset as seen in table \textbf{TABLE REF}.
+
+\begin{table}[htpb]
+  \centering
+  \caption{Model performance on LIAR dataset}
+  \label{tab:liarperformance}
+
+  \begin{tabular}{c|cccc}
+    Model & Logistic Regression & Large DNN & Small DNN & XGBoost \\ \hline
+    Precision & X & Y & Z & A \\ \hline
+    Recall & X & Y & Z & A \\ \hline
+    F1-Score & X & Y & Z & A \\ \hline
+    Accuracy & ... & ... & ... & ... \\ \hline
+  \end{tabular}
+\end{table}
+
+In addition to challenges regarding the available data, there are other challenges that any fake news classifier
+encounters as we will discuss next.
+
+\subsection{Ethical considerations with fake news classification}
+The subpar performance on the LIAR dataset highlights the difficulty in creating a proper fake news classifier. Many
+companies have tried and failed to automatically moderate fake news due to the nuances that gets introduced when moving
+from extremely domain specific models, to more generalised models working on multiple domains. When trying to
+generalise a model, questions about what consitutes reliable, fake or misleading news quickly arises. Are all
+politically motivated publications fake / unreliable? The IMF, European Central Bank, Red Cross and many more, are all
+inherently political organisations, which we all still generally percieve as reliable. On the same token, publications
+on eugenics from nazi era germany are generally seens as unreliable. Furthermore, does a publication raising awareness
+of the real side-effects of the HPV vaccine count as reliable? And how does an algorithm distinguish this from a
+publication spreading fake statistics of the corona vaccine?. Whilst there are publishers that we all (generally)
+accept as being reliable, and others that are generally percieved as being unreliable, the exact line delineating the
+two is hard (if not impossible) to strongly define.

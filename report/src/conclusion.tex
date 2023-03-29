@@ -1,1 +1,11 @@
 \section{Conclusion}
+In this technical report we described the development of a Deep Neural Network for fake news classification. We started
+by outlining the data import, exploration and processing that we did on the FakeNewsCorpus dataset, which included both
+tokenization, feature extraction using TF-IDF and dimensionality reduction using Single Value Decomposition.. We then build a
+simple baseline model using logistic regression to serve as our baseline which achieved a \textbf{X\%} on the dataset.
+We then constructed a DNN that achieved a higher accuracy, reaching \textbf{X\%}. To test the generalisability of our
+model, we applied them to a different fake news dataset (the LIAR dataset), and found that they both achieved a very
+poor performance, only reaching \textbf{X\%} and \textbf{X\%} accuracy respectively. We conclude that we have managed
+to build two efficient models that function well on the narrow (and potentially inaccurate) domain defined in the
+FakeNewsCorpus dataset, but that generalises poorly to other domains such as that found in LIAR. Therefore, our
+approach has failed to build a general fake news classifier, using the methods outlined above.
