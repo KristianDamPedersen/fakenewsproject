@@ -21,11 +21,19 @@ are more appropriate for specific machine learning tasks.
 Here is main bulletpoints of the data.
 
 \begin{enumerate}
-  \item The dataset contains \textbf{XXX} articles.
-  \item The articles are sorted into the following categories:
-  \item The number of articles in each category is distributed like so: \textbf{DISTRIBUTION GRAPH}
+  \item The dataset contains $ 8.528.956 $ articles.
+  \item The articles are sorted into the following categories: [bias, clickbait, conspiracy, fake, hate, junksci (junk
+    science), political, reliable, rumor, satire, unknown, unreliable]
+  \item The number of articles in each category is distributed as seen in figure \textbf{REF}
+  \item The dataset contains many articles from just a few publishers, as can be seen in figure \textbf{REF}.
 \end{enumerate}
 
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=1\textwidth]{combdist}
+  \caption{}
+  \label{fig:}
+\end{figure}
 \subsubsection{Vocabulary sizes}
 After getting the data into a managable format, we where then able to start properly exploring it. The first thing we
 did was to calculate the vocabulary size of the dataset. We did this by first tokenizing the data, and then counting the
