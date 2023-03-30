@@ -15,7 +15,7 @@ try:
     xgb.load_model("data/xgb.json")
 except:
     print("models not found, fitting new model")
-    df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"])
+    df = pd.read_parquet("data/small_train.parquet", columns=["tokens", "class"], engine='fastparquet')
     X_train = df["tokens"]
     y_train = df["class"]
 
@@ -40,7 +40,7 @@ except:
     xgb.save_model("data/xgb.json")
     print("finished fitting models")
 
-df_test = pd.read_parquet("data/test.parquet")
+df_test = pd.read_parquet("data/test.parquet", engine='fastparquet')
 
 X_test = df_test["tokens"]
 y_test = df_test["class"]
