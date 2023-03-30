@@ -53,7 +53,9 @@ We decided to visualize the performance using ROC comparison, and as we see from
 \end{figure}
 
 
-\subsubsection{UMAP and lack of seperability in LIAR}
+\subsubsection{Inseparability of LIAR on fitted models}
+We ran LIAR through the same TF-IDF, SVD and UMAP pipeline to see where they were located in the clusters, we would hope to see some sort of separation of the various levels of truthiness if we want to have any hope in predicting truthiness of the LIAR dataset. (INSERT PLOT HERE) As seen in the UMAP representation, the 6 classes of LIAR are interleaved, which means we will not be able to separate the classes nor make any meaningful inferences on the dataset. To improve this, we would have to finetune on LIAR as well as replace TF-IDF with something that has local context. TF-IDF / SVD gives us a single embedding representing the important keywords of the entire document without understanding the semantics of individual sentences. A word embedding model would be a sensible alternative to try.
+
 As we did in the beginning, we decided to put the LIAR dataset through the UMAP model that was fitted to the
 FakeNewsCorpus dataset. From figure \ref{fig:liarvsfake} we see that the articles in the LIAR dataset completely lacks seperability,
 meaning our models have no real way of delineating them from eachother.
