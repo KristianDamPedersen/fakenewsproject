@@ -55,11 +55,11 @@ colours = [
     "red",  # Fake
     "orange",  # Biased
     "#666040",  # Unrealiable
-    "#6600ff",  # Hate
+    "#660022",  # Hate
     "cyan",  # Conspiracy
     "grey",  # Clickbait
-    "purple",  # Satirical
-    "#ff00ff",
+    "#660066", # Satire
+    "#ff00ff"
 ]  # Liar Data (All classes)
 # Plot
 plt.scatter(
