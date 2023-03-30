@@ -52,12 +52,12 @@ def main():
 
 # Plot the ROC curve
     plt.figure()
-    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.plot([0, 1], [0, 1], color='navy', lw=1, linestyle='--')
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Receiver Operating Characteristics')
+    plt.title('ROC on LIAR dataset')
     evaluate_pipelines(pipelines, models, X_tokens, y)
     plt.legend(loc="lower right")
     plt.savefig('figures/ROC_LIAR.png')
@@ -100,8 +100,16 @@ def evaluate_pipeline(pipeline, models, X, y):
 
     # Predict and evaluate model
     model = models[pipeline['model']]
-    y_pred = model.predict(X)
-    y_pred_binary = (y_pred > 0.5).astype(int)
+    if pipeline['type'] == 'tensorflow':
+        y_pred = model.predict(X)
+        y_pred_binary = (y_pred > 0.5).astype(int)
+    else:
+        y_pred = model.predict_proba(X)
+        ## predict_proba gives each guess as a list of probabilities.
+        ## the predicted value can therefore be interpreted as the p(1)
+        y_pred = [b for a,b in y_pred]
+        y_pred_binary = model.predict(X)
+
 
     print(f"Results for {pipeline['name']}")
     print(classification_report(y, y_pred_binary))
@@ -109,7 +117,7 @@ def evaluate_pipeline(pipeline, models, X, y):
     # Calculate the ROC curve, AUC score and add the line
     fpr, tpr, _ = roc_curve(y, y_pred)
     roc_auc = auc(fpr, tpr)
-    plt.plot(fpr, tpr, color=pipeline['color'], lw=2, label=f'{pipeline["name"]} (area = %0.2f)' % roc_auc)
+    plt.plot(fpr, tpr, color=pipeline['color'], lw=1, label=f'{pipeline["name"]} (area = %0.2f)' % roc_auc)
 
 
 if __name__ == '__main__': 

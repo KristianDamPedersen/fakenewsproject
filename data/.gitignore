@@ -1,4 +1,4 @@
 *.parquet
-*.np*
+intermediate/*
 umap.pkl
 !.gitignore
