@@ -60,7 +60,7 @@ def main():
     plt.title('ROC on LIAR dataset')
     evaluate_pipelines(pipelines, models, X_tokens, y)
     plt.legend(loc="lower right")
-    plt.savefig('figures/ROC_LIAR.png')
+    plt.savefig('report/src/figures/ROC_LIAR.png')
 
 
 
@@ -117,7 +117,7 @@ def evaluate_pipeline(pipeline, models, X, y):
     # Calculate the ROC curve, AUC score and add the line
     fpr, tpr, _ = roc_curve(y, y_pred)
     roc_auc = auc(fpr, tpr)
-    plt.plot(fpr, tpr, color=pipeline['color'], lw=1, label=f'{pipeline["name"]} (area = %0.2f)' % roc_auc)
+    plt.plot(fpr, tpr, color=pipeline['color'], lw=1, label=f'{pipeline["name"]} (AUC = %0.3f)' % roc_auc)
 
 
 if __name__ == '__main__': 
