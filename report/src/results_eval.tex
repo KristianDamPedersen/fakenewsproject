@@ -42,7 +42,15 @@ particular by the relatively terrible accuracy acheived on the LIAR dataset as s
 \end{table}
 
 \subsubsection{ROC comparison}
-Lorem ipsum
+We decided to visualize the performance using ROC comparison, and as we see from figure (REF), all of the models lose
+(almost) all their predictive power when we apply them to the LIAR dataset.
+
+
+\subsubsection{UMAP and lack of seperability in LIAR}
+As we did in the beginning, we decided to put the LIAR dataset through the UMAP model that was fitted to the
+FakeNewsCorpus dataset. From figure (REF) we see that the articles in the LIAR dataset completely lacks seperability,
+meaning our models have no real way of delineating them from eachother.
+
 
 \subsection{Ethical considerations with fake news classification}
 The subpar performance on the LIAR dataset highlights the difficulty in creating a proper fake news classifier. When trying to
