@@ -1,6 +1,6 @@
 \section{Complex models}
 \subsection{XGBoost}
-XGBoost is an ensemble learner, meaning it is a collection of smaller models. The way this algorithm is trained, is we start with a decision tree. In every boosting round, which is done 10 times, we find the weights responsible for incorrect classifications, boost them (making them more important for the specific tree), and attempt to minimize the loss. This means every subsequent tree is trying to correct the errors of the previous tree.
+XGBoost is an ensemble learner, meaning it is a collection of smaller models. The way this algorithm is trained, is we start with a decision tree. In every boosting round, which is done 10 times, we find the weights responsible for incorrect classifications, boost them (making them more important for the new tree), and attempt to minimize the loss. This means every subsequent tree is trying to correct the errors of the previous tree.
 
 \subsection{Large DNN}
 This model uses TF-IDF 4096 without further dimensionality reduction. It is a simple feed-forward network with the layers 1024, DO, 512, DO, 256, DO, 128, DO, 64, 1 where DO is a drop-out layer of 0.2, meaning every epoch it resets 20\% of the weights. The idea with this funnel-shaped network was that it would reduce the dimensions on its own and learn how to classify the dataset with minimal loss of data. Shortcomings of the model: The model is on the larger side (57 MB), was slow to train and has a slow inference speed.
@@ -8,4 +8,4 @@ This model uses TF-IDF 4096 without further dimensionality reduction. It is a si
 \subsection{Small DNN}
 This model is a more traditionally shaped feed-forward network. Since the data was passed through dimensionality reduction
 already, it means the initial input space can be smaller. The layers are: 384, DO, 512, DO, 512, DO, 128, DO', 16, 1.
-DO' is a dropout of 0.1 and DO is the same as in the large DNN.
+DO' is a dropout of 0.1 and DO is the same as in the large DNN. The initial SVD step made this model much smaller, and faster at inference.
