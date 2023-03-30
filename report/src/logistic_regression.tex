@@ -1,7 +1,8 @@
 \section{Simple model: Logistic Regression (1/2 page)} 
 For our baseline, we chose to use a logistic regression model. Much of the heavy lifting in developing this model took place in the previous sections,
-so once we reached this step we chose to just use a relatively naive implementation, using the default values provided
-by \textit{scikit-learn}. This meant we had the following hyperparameters for our model. \textbf{Penalty}: l2. This form of penalty adds a penatly that is equal to the square of the magnitude of the
+so once we reached this step we chose to just use a relatively naive implementation, using the default arguments provided
+by \textit{scikit-learn}. This meant we had the following hyperparameters for our model. \textbf{Penalty}: l2. This form of penalty adds a penalty that is equal to the square of the magnitude of the
     coefficients of the model. In other words, it tries to limit the influence that any single coefficient has on the
     model. \textbf{Solver}: lbfgs (limited memory BFGS). This solver is one of the most general logistic regression
     solvers, and is therefore a natural fit when we don't wish to direct it further.
+

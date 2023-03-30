@@ -15,13 +15,13 @@ article as reliable.
 \subsubsection{Splitting the dataset}
 We decided to split our data into into a training, validation and testing set, with a 80-10-10 split.
 
-\subsubsection{Tokenization}
-We tokenized the text by first splitting it into
-individual words, removing stop words and using lemmitization to further reduce the vocabulary by condensing words into
+\subsubsection{Tokenisation}
+We tokenised the text by first splitting it into
+individual words, removing stop words and using lemmatisation to further reduce the vocabulary by condensing words into
 base form.
 
 \subsubsection{Feature extraction using TF-IDF}
-After tokenizing the content column, we were then able to train a TF-IDF (Term Frequency - Inverse Document Frequency)
+After tokenising the content column, we were then able to train a TF-IDF (Term Frequency - Inverse Document Frequency)
 model on it. This model looks at how often a given token (word) appears in an article, and compares it to how big that
 document is. By training this model, we essentially output a large vector, which we can use to encode the tokens into a
 large matrix that can be fed into our models.
