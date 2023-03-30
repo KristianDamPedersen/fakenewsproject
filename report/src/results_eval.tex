@@ -54,11 +54,10 @@ We decided to visualize the performance using ROC comparison, and as we see from
 
 
 \subsubsection{Inseparability of LIAR on fitted models}
-We ran LIAR through the same TF-IDF, SVD and UMAP pipeline to see where they were located in the clusters, we would hope to see some sort of separation of the various levels of truthiness if we want to have any hope in predicting truthiness of the LIAR dataset. (INSERT PLOT HERE) As seen in the UMAP representation, the 6 classes of LIAR are interleaved, which means we will not be able to separate the classes nor make any meaningful inferences on the dataset. To improve this, we would have to finetune on LIAR as well as replace TF-IDF with something that has local context. TF-IDF / SVD gives us a single embedding representing the important keywords of the entire document without understanding the semantics of individual sentences. A word embedding model would be a sensible alternative to try.
+We ran LIAR through the same TF-IDF, SVD and UMAP pipeline to see where they were located in the clusters, we would hope
+to see some sort of separation of the various levels of truthiness if we want to have any hope in predicting truthiness
+of the LIAR dataset. As seen in the UMAP representation (figure \ref{fig:liarvsfake}), the 6 classes of LIAR are interleaved, which means we will not be able to separate the classes nor make any meaningful inferences on the dataset.
 
-As we did in the beginning, we decided to put the LIAR dataset through the UMAP model that was fitted to the
-FakeNewsCorpus dataset. From figure \ref{fig:liarvsfake} we see that the articles in the LIAR dataset completely lacks seperability,
-meaning our models have no real way of delineating them from eachother.
 \begin{figure}[htpb]
   \centering
   \includegraphics[width=1\textwidth]{figures/umapLiarVsFake}
@@ -66,11 +65,3 @@ meaning our models have no real way of delineating them from eachother.
   \label{fig:liarvsfake}
 \end{figure}
 
-\subsection{Ethical considerations with fake news classification}
-The subpar performance on the LIAR dataset highlights the difficulty in creating a proper fake news classifier. When trying to
-generalise a model, questions about what consitutes reliable, fake or misleading news quickly arises. Does a publication raising awareness
-of the real side-effects of the HPV vaccine count as reliable? And how does an algorithm distinguish this from a
-publication spreading fake statistics of the corona vaccine?. Whilst there are publishers that we all (generally)
-accept as being reliable, and others that are generally percieved as being unreliable, the exact line delineating the
-two is hard (if not impossible) to strongly define.
-\newpage

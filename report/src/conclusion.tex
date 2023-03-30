@@ -1,4 +1,25 @@
 \section{Conclusion}
+
+\subsection{Dataset issues}
+As has been highlighted throughout this report, the FakeNewsCorpus dataset has many shortcomings, chief among which is
+the classification of reliability based on domain. As we see, a classifier trained on this dataset, generalizes very
+poorly outside its domain.
+
+\subsection{TF-IDF limitations}
+Another key limitation is the use of TF-IDF model for embedding the content. The limitation is that TF-IDF and SVD does
+not provide us with local context. They instead gives us a single embedding representing the important keywords of the
+entire document, without understanding the semantics of individual sentences. Here a more complex word embedding model
+would be a sensible alternative to try.
+
+\subsection{Ethical considerations with fake news classification}
+The subpar performance on the LIAR dataset highlights the difficulty in creating a proper fake news classifier. When trying to
+generalise a model, questions about what consitutes reliable, fake or misleading news quickly arises. Does a publication raising awareness
+of the real side-effects of the HPV vaccine count as reliable? And how does an algorithm distinguish this from a
+publication spreading fake statistics of the corona vaccine?. Whilst there are publishers that we all (generally)
+accept as being reliable, and others that are generally percieved as being unreliable, the exact line delineating the
+two is hard (if not impossible) to strongly define.
+
+
 In this technical report we described the exploration of three different models for fake news classification. We started
 by outlining the data import, exploration and processing we applied to the FakeNewsCorpus dataset. The processing
 included both tokenization, feature extracting using TF-IDF and dimensionality reduction through single value
