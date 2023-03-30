@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.linear_model import LogisticRegression
@@ -53,5 +54,11 @@ y_test = df_test["class"]
 
 X_test = svd.transform(tfidf.transform(X_test))
 y_pred = lr.predict(X_test)
-
+y_prob = lr.predict_prob(X_test)
 print(classification_report(y_test, y_pred))
+
+# Save results for later use
+y_pred = np.array(y_prob)  # Your predictions
+y_true = np.array(y_test)  # True labels
+np.save("data/predictions/simple_y_probs.npy", y_pred)
+np.save("data/predictions/simple_y_true.npy", y_true)
