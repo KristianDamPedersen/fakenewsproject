@@ -24,15 +24,15 @@ Here is main bulletpoints of the data.
   \item The dataset contains $ 8.528.956 $ articles.
   \item The articles are sorted into the following categories: [bias, clickbait, conspiracy, fake, hate, junksci (junk
     science), political, reliable, rumor, satire, unknown, unreliable]
-  \item The number of articles in each category is distributed as seen in figure \textbf{REF}
-  \item The dataset contains many articles from just a few publishers, as can be seen in figure \textbf{REF}.
+  \item The number of articles in each category is distributed as seen in figure \ref{fig:combdist}
+  \item The dataset contains many articles from just a few publishers, as can be seen in figure \ref{fig:combdist}.
 \end{enumerate}
 
 \begin{figure}[htpb]
   \centering
   \includegraphics[width=1\textwidth]{combdist}
-  \caption{}
-  \label{fig:}
+  \caption{Article type and domain distribution}
+  \label{fig:combdist}
 \end{figure}
 \subsubsection{Vocabulary sizes}
 After getting the data into a managable format, we where then able to start properly exploring it. The first thing we
@@ -62,16 +62,36 @@ sense, as stemming reduces the number of unique tokens by grouping together word
 % TODO ADD THESE NUMBERS TO TABLE
 
 
-\subsubsection{Classifiyng truth per. domain}
+\subsubsection{Classifiyng truth per. domain}\label{sec:truth_pr_domain}
 One important aspect in the dataset, is how it classifies a news articles into the categories. The creators of the
 dataset has chosen to classify the articles per domain, meaning that all the articles from any given domain will be
 given the same level of credibility. Ignoring the ethical implications, this meant that we quite quickly realised that
 we had to exclude domain from any of our training, as the model would quickly just use the domain only for
 classification.
-\subsubsection{Duplicated articles}
+\subsubsection{Duplicated articles}\label{sec:dup_articles}
 Another things we realised quite quickly, is that the dataset contains a significant amount of duplicated articles as
-seen in table \textbf{TABLE}. As we can see, this is due to different popups that the webscraper has encountered as it
-was trying to scrape the dataset, such as the \textbf{NUMBER} articles from Wikileaks all sharing:
+seen in table \ref{tab:dupart}.
+
+\begin{table}[htpb]
+  \centering
+  \caption{Duplicated articles and their domain}
+  \label{tab:dupart}
+  \begin{tabular}{r | c | c| c}
+    domain & type & content & count \\ \hline
+    nationalreview.com & political & Plus one article on Google Plus (Thanks to al... & 273388 \\ \hline
+    wikileaks.org & unreliable & Tor Tor is an encrypted anonymising network t... & 169259 \\ \hline
+    sputniknews.com & bias & Dear readers, we are excited to announce that ... & 102671 \\ \hline
+    abovetopsecret.com & conspiracy & It looks like you're using an Ad Blocker. Ple... & 72978 \\ \hline
+    investmentwatchblog.com & bias & It only takes a few moments to share an articl... & 35490 \\ \hline
+    dailykos.com & political & © Kos Media, LLC Site content may be used for... & 29649 \\ \hline
+    sputniknews.com & bias & E-mail: Screen Name: Password: Confirm pass... & 27668 \\ \hline
+    lifenews.com & bias & FAIR USE NOTICE. Many of the stories on this s... & 24796 \\ \hline
+    express.co.uk & rumor & Express. Home of the Daily and Sunday Express... & 23216 \\ \hline
+    nytimes.com & reliable & Opinion >> Should Beach Privatization Be Allowe... & 23035
+  \end{tabular}
+\end{table}
+As we can see, this is due to different popups that the webscraper has encountered as it
+was trying to scrape the dataset, such as the $ 169.259 $ articles from Wikileaks all sharing:
 \begin{quote}
     \textit{Tor}
 
@@ -81,8 +101,16 @@ was trying to scrape the dataset, such as the \textbf{NUMBER} articles from Wiki
 These duplicated articles were simply removed before we trained our model.
 
 \subsubsection{Lower dimensionality exploration WIP}
-%/TODO INCLUDE PLOT (WO/LIAR)
-We have made a 2D UMAP representation of the dataset, which is a form of non-linear dimensionality reduction. We've trained the model unsupervised to get the inherent distribution of the data without any labelling bias (???). PLOT HERE. The plot contains a large cluster which contains a rough mix of everything which UMAP couldn't separate as well as some more concentrated cluster of junk science and conspiracy articles. On the boundaries of this cluster, we have some more concentrated clusters that the model was able to separete, this includes reliable, fake. Away from the main cluster, we have a large cluster of almost entirely reliable content the model was easily able to separate from everything else, other clusters far apart include unreliable, rumors and highly invariate hate news and satire (very small concentrated clusters). This serves as our justication for our binary grouping of the dataset since realiable articles are clearly delineated from the rest of the dataset. 
+We have made a 2D UMAP representation of the dataset, which is a form of non-linear dimensionality reduction. We've
+trained the model unsupervised to get the inherent distribution of the data without any labelling bias.
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/ROC_LIAR}
+  \caption{UMAP representation}
+  \label{fig:umap_explore}
+\end{figure}
+
+The plot contains a large cluster which contains a rough mix of everything which UMAP couldn't separate as well as some more concentrated cluster of junk science and conspiracy articles. On the boundaries of this cluster, we have some more concentrated clusters that the model was able to separete, this includes reliable, fake. Away from the main cluster, we have a large cluster of almost entirely reliable content the model was easily able to separate from everything else, other clusters far apart include unreliable, rumors and highly invariate hate news and satire (very small concentrated clusters). This serves as our justication for our binary grouping of the dataset since realiable articles are clearly delineated from the rest of the dataset. 
 
 
 

@@ -4,9 +4,9 @@ useful format. This goes in addition to any steps taken in the previous section.
 
 \subsubsection{What features to focus on}
 For the models, we chose to primarily focus on the content of the articles as predictors for whether a given article is
-fake or not. Whilst we were tempted to include "domain" initially, after the discovery discussed in section \textbf{REF},
+fake or not. Whilst we were tempted to include "domain" initially, after the discovery discussed in section \ref{sec:truth_pr_domain},
 we decided against We also chose to ignore the titles of the articles, as these where often simply reflections of the
-content. \todo{Correct?}
+content.
 
 \subsubsection{Grouping}
 Whilst it is possible to use logistic regression for multi-class classification, we instead chose to build a binary
@@ -22,7 +22,7 @@ At this point we start moving into territory where we need to split our data. So
 a training, validation and testing set, with a 80-10-10 split.
 
 \subsubsection{Tokenization}
-After filtering out duplicate articles ( \textbf{REFERECE TO PREVIOUS SECTION}), and deciding to focus on the content of
+After filtering out duplicate articles \ref{sec:dup_articles} and deciding to focus on the content of
 the articles for our input, the next step was to tokenize the data. We tokenized the text by first splitting it into
 individual words, removing stop words and using lemmitization to further reduce the vocabulary by condensing words into
 base form.
@@ -60,5 +60,6 @@ There were a few reasons for the differences:
     impact our results negatively, and since the models were fairly straight forward to train we choose to increase the
     dimensionality such that our TF-IDF ouputted a 4096 dimensional vector, that then got reduced to 384 dimensions.
 
-  \item \textbf{Alternative DNN}
+  \item \textbf{Alternative DNN} : Lastly chose to omit the dimensionality reduction from the alternative (large DNN),
+    in ordet to see wether a larger model would improve performance.
 \end{enumerate}
