@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from lib.custom_tokeniser import custom_tokenizer
@@ -53,3 +54,9 @@ acc = accuracy_score(y_pred, y_test)
 print(f"Accuracy {acc}")
 
 print(classification_report(y_test, y_pred))
+
+# Save results for later use
+y_pred = np.array(y_pred)  # Your predictions
+y_true = np.array(y_test)  # True labels
+np.save("data/predictions/xgboost_y_preds.npy", y_pred)
+np.save("data/predictions/xgboost_y_true.npy", y_true)
