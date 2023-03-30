@@ -44,7 +44,15 @@ except:
 df["type"] = "news"
 
 df = pd.concat([df, liar_df])
-classes = ["news", "true", "mostly-true", "half-true", "barely-true", "false", "pants-fire"]
+classes = [
+    "news",
+    "true",
+    "mostly-true",
+    "half-true",
+    "barely-true",
+    "false",
+    "pants-fire",
+]
 y_train = df["type"]
 
 embedding = reducer.transform(svd.transform(tfidf.transform(df["tokens"])))
@@ -59,12 +67,12 @@ for i, c in enumerate(classes):
 
 colours = [
     "grey",  # Fake news corpus
-    "#007700",   # True
-    "#7FFF00",   # Mostly true
-    "#DDDD00",   # Half true
-    "#FF2400",   # Barely true
-    "#FF003E",   # False
-    "#0000FF",   # Pants on fire
+    "#007700",  # True
+    "#7FFF00",  # Mostly true
+    "#DDDD00",  # Half true
+    "#FF2400",  # Barely true
+    "#FF003E",  # False
+    "#0000FF",  # Pants on fire
 ]  # Liar Data (All classes)
 # Plot
 plt.scatter(
