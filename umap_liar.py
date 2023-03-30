@@ -59,11 +59,11 @@ for i, c in enumerate(classes):
 
 colours = [
     "grey",  # Fake news corpus
-    "#008800",   # True
-    "#229922",   # Mostly true
+    "#007700",   # True
+    "#7FFF00",   # Mostly true
     "#DDDD00",   # Half true
-    "#FF4400",   # Barely true
-    "#DD0000",   # False
+    "#FF2400",   # Barely true
+    "#FF003E",   # False
     "#0000FF",   # Pants on fire
 ]  # Liar Data (All classes)
 # Plot
