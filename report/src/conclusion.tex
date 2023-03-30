@@ -2,13 +2,13 @@
 
 \subsection{Dataset issues}
 As has been highlighted throughout this report, the FakeNewsCorpus dataset has many shortcomings, chief among which is
-the classification of reliability based on domain. As we see, a classifier trained on this dataset, generalizes very
-poorly outside its domain.
+the classification of reliability based on domain. As we see, our classifiers trained on this dataset, generalise quite
+poorly outside of their original domain.
 
 \subsection{TF-IDF limitations}
-Another key limitation is the use of TF-IDF model for embedding the content. The limitation is that TF-IDF and SVD does
-not provide us with local context. They instead gives us a single embedding representing the important keywords of the
-entire document, without understanding the semantics of individual sentences. Here a more complex word embedding model
+Another key limitation is the use of TF-IDF model for embedding the content. The limitation is that TF-IDF does
+not provide us with local context. It instead provides us with a single embedding representing the important keywords of the
+entire document, without understanding the semantics of individual sentences. Here, a more complex word embedding model
 would be a sensible alternative to try.
 
 \subsection{Ethical considerations with fake news classification}
@@ -22,10 +22,10 @@ two is hard (if not impossible) to strongly define.
 
 In this technical report we described the exploration of three different models for fake news classification. We started
 by outlining the data import, exploration and processing we applied to the FakeNewsCorpus dataset. The processing
-included both tokenization, feature extracting using TF-IDF and dimensionality reduction through single value
+included both tokenisation, feature extracting using TF-IDF and dimensionality reduction through single value
 decomposition. We build a logistic regression model to serve as our baseline, and then constructed three more complex
-models (two DNNs and an XGBoost model). Whilst all the models performed admirably on the FakeNewsCorpus dataset, they
-all failed to generalize when we tested them against another dataset (LIAR). As discussed in our evaluation section,
+models (two DNNs and an XGBoost model). Whilst all of the models performed admirably on the FakeNewsCorpus dataset, they
+all failed to generalise when we tested them against another dataset (LIAR). As discussed in our evaluation section,
 this is likely due both to the quality of our dataset and the inherent difficulties in constructing fake news
 classifiers in general. In the end we conclude that our approach has failed to build a general fake news classifier, and
 that more sophisticated tools needs to be incorporated in order to achieve generalisable success.
