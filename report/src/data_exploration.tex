@@ -4,11 +4,14 @@
 The first challenge was simply downloading and unpacking the files on our Linux systems. We ended up concatenating the
 files into a temporary zip file using \texttt{cat} and then unzipping the file using \texttt{unzip}. \\
 
-Trying to read the data in python proved to be a challenging task, as the .csv file seemed to be corrupted or malformed with rows containing different amounts of columns. Some article content included \texttt{\textbackslash r}, which was interpreted as "newline", and thus, a new row in the middle of arbitrary news content. A single command '\texttt{sed 's/\textbackslash r/ /g' in.csv > out.csv}' replacing the carriage returns with spaces (to preserve word boundaries) turned out to solve this issue.\\
+Trying to read the data in python proved to be a challenging task, as the .csv file seemed to be corrupted or malformed
+with rows containing different amounts of columns. Some article content included \texttt{\textbackslash r} (a carriage
+return), which was interpreted as "newline", and thus, a new row in the middle of arbitrary news content. A single command '\texttt{sed 's/\textbackslash r/ /g' in.csv > out.csv}' replacing the carriage returns with spaces (to preserve word boundaries) turned out to solve this issue.\\
 % \todo{Perhaps missing a section on summary statistics?}
 
 \subsection{Larger than memory datasets}
-Due to the size of our dataset, we had to use different methods for handling our data. Throughout this report we used 3 different methods: SQL Databases, chunk-wise operations and brute force (acces
+Due to the size of our dataset, we had to use different methods for handling our data. Throughout this report we used 3
+different methods: SQL Databases, chunk-wise streaming and brute force (access
 to a large enough server). After getting the data into a readable CSV file in the previous step, we decided to load it
 into an SQL database for easier handling and exploration. In later sections we will use the other two methods as they
 are more appropriate for specific machine learning tasks.
@@ -27,11 +30,11 @@ reliable, rumor, satire, unknown, unreliable]. The number of articles in each ca
   \label{fig:combdist}
 \end{figure}
 \subsubsection{Vocabulary sizes}
-After getting the data into a managable format, we where then able to start properly exploring it. We started by
+After getting the data into a managable format, we were then able to start properly TK THIS SENTENCE IS WEIRD exploring it. We started by
 calculating the vocabulary size of the dataset. We did this by first tokenising the data, and then counting the
 unique tokens. We then repeated this process after removing stopwords, and finally after stemming the tokens. The
 results are shown in table \ref{tab:vocab_sizes}. As we can see the vocabulary decreases slightly after removing
-stopwords, and significantly after stemming. As we see removing a list of common words doesn't reduce the vocabulary
+stopwords, and significantly after stemming. As we see, removing a list of common words doesn't reduce the vocabulary
 much, but reducing words to their root does.
 
 \begin{table}[h]
@@ -76,7 +79,7 @@ seen in table \ref{tab:dupart}.
 As we can see, this is due to different popups that the webscraper has encountered as it
 was trying to scrape the dataset. These duplicated articles were simply removed before we trained our model.
 
-\subsubsection{Lower dimensionality exploration WIP}
+\subsubsection{Lower dimensionality}
 We have made a 2D UMAP representation of the dataset, which is a form of non-linear dimensionality reduction. We've
 trained the model unsupervised to get the inherent distribution of the data without any labelling bias.
 \begin{figure}[htpb]

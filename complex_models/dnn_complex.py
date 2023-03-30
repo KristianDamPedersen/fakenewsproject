@@ -79,7 +79,9 @@ except:
     dnn.add(Dense(16, activation="relu"))
     dnn.add(Dense(1, activation="sigmoid"))
 
-    val_df = pd.read_parquet("data/val.parquet", columns=["tokens", "class"], engine="fastparquet")
+    val_df = pd.read_parquet(
+        "data/val.parquet", columns=["tokens", "class"], engine="fastparquet"
+    )
 
     print("loading val")
     X_val = val_df["tokens"].to_numpy()
@@ -115,7 +117,7 @@ del test_df
 X_test = transform(X_test)
 
 y_pred = dnn.predict(X_test)
-y_pred_binary = (y_pred > 0.5)
+y_pred_binary = y_pred > 0.5
 acc = accuracy_score(y_test, y_pred_binary)
 print(f"Accuracy {acc}")
 
