@@ -1,3 +1,4 @@
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import pickle
@@ -51,7 +52,10 @@ def main():
         }
     ]
 
-# Plot the ROC curve
+    evaluate_pipelines(pipelines, models, X_tokens, y)
+    plot_roc_curve(pipelines)
+
+def plot_roc_curve(pipelines):
     plt.figure()
     plt.plot([0, 1], [0, 1], color='navy', lw=1, linestyle='--')
     plt.xlim([0.0, 1.0])
@@ -59,10 +63,10 @@ def main():
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     plt.title('ROC on LIAR dataset')
-    evaluate_pipelines(pipelines, models, X_tokens, y)
+    for pipeline in pipelines:
+        plt.plot(pipeline['fpr'], pipeline['tpr'], color=pipeline['color'], lw=1, label=f'{pipeline["name"]} (AUC = %0.3f)' % pipeline['roc_auc'])
     plt.legend(loc="lower right")
     plt.savefig('report/src/figures/ROC_LIAR.png')
-
 
 
 def load_models():
@@ -111,39 +115,50 @@ def evaluate_pipeline(pipeline, models, X, y):
         y_pred = [b for a,b in y_pred]
         y_pred_binary = model.predict(X)
 
-
     print(f"Results for {pipeline['name']}")
     print(classification_report(y, y_pred_binary))
     save_matrix(pipeline['name'], y, y_pred_binary)
-    # Calculate the ROC curve, AUC score and add the line
+    
+    # Calculate the ROC curve, AUC score and store the values in the pipeline dictionary
     fpr, tpr, _ = roc_curve(y, y_pred)
     roc_auc = auc(fpr, tpr)
-    plt.plot(fpr, tpr, color=pipeline['color'], lw=1, label=f'{pipeline["name"]} (AUC = %0.3f)' % roc_auc)
+    pipeline['fpr'] = fpr
+    pipeline['tpr'] = tpr
+    pipeline['roc_auc'] = roc_auc
 
 def save_matrix(name, y_true, y_pred):
+
     path='report/src/figures/'
     # Make confusion matrix
     conf_matrix = confusion_matrix(y_true, y_pred, normalize="true")
+
+    # Create a new figure and axis
+    fig, ax = plt.subplots(figsize=(5, 5))
+
     # Plot confusion matrix
-    plt.figure(figsize=(5, 5))
-    plt.imshow(conf_matrix, interpolation="nearest", cmap=plt.cm.gray_r)
+    im = ax.imshow(conf_matrix, interpolation="nearest", cmap=plt.cm.gray_r)
+
+    # Define labels
+    labels = [['TN', 'FP'], ['FN', 'TP']]
+
     for i in range(2):
         for j in range(2):
-            plt.text(
+            ax.text(
                 j,
                 i,
-                format(conf_matrix[i, j], ".2f"),
+                f"{labels[i][j]}: {format(conf_matrix[i, j], '.2f')}",
                 horizontalalignment="center",
                 color="white" if conf_matrix[i, j] > 0.5 else "black",
             )
 
-    plt.xlabel("Predicted label")
-    plt.ylabel("True label")
-    plt.axis('off')
-    plt.title(name)
+    ax.set_xlabel("Predicted label")
+    ax.set_ylabel("True label")
+    ax.axis('off')
+    ax.set_title(name)
 
-# Save confusion matrix as PNG file
-    plt.savefig(path+name+'_conf_matrix.png', dpi=300, bbox_inches='tight')
+    # Save confusion matrix as PNG file
+    fig.savefig(path+name+'_conf_matrix.png', dpi=300, bbox_inches='tight')
+
 
 
 
