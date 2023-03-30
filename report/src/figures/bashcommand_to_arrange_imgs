@@ -1,0 +1,2 @@
+montage 'Simple Model_conf_matrix.png' 'Big DNN_conf_matrix.png' 'Small DNN_conf_matrix.png' 'XGBoost_conf_matrix.png' -border 5 -bordercolor white -tile 4x1 -geometry +0+0 matrix_combined.png
+

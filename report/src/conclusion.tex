@@ -1,11 +1,32 @@
 \section{Conclusion}
-In this technical report we described the development of a Deep Neural Network for fake news classification. We started
-by outlining the data import, exploration and processing that we did on the FakeNewsCorpus dataset, which included both
-tokenization, feature extraction using TF-IDF and dimensionality reduction using Single Value Decomposition.. We then build a
-simple baseline model using logistic regression to serve as our baseline which achieved a \textbf{X\%} on the dataset.
-We then constructed a DNN that achieved a higher accuracy, reaching \textbf{X\%}. To test the generalisability of our
-model, we applied them to a different fake news dataset (the LIAR dataset), and found that they both achieved a very
-poor performance, only reaching \textbf{X\%} and \textbf{X\%} accuracy respectively. We conclude that we have managed
-to build two efficient models that function well on the narrow (and potentially inaccurate) domain defined in the
-FakeNewsCorpus dataset, but that generalises poorly to other domains such as that found in LIAR. Therefore, our
-approach has failed to build a general fake news classifier, using the methods outlined above.
+
+\subsection{Dataset issues}
+As has been highlighted throughout this report, the FakeNewsCorpus dataset has many shortcomings, chief among which is
+the classification of reliability based on domain. As we see, our classifiers trained on this dataset, generalise quite
+poorly outside of their original domain.
+
+\subsection{TF-IDF limitations}
+Another key limitation is the use of TF-IDF model for embedding the content. The limitation is that TF-IDF does
+not provide us with local context. It instead provides us with a single embedding representing the important keywords of the
+entire document, without understanding the semantics of individual sentences. Here, a more complex word embedding model
+would be a sensible alternative to try.
+
+\subsection{Ethical considerations with fake news classification}
+The subpar performance on the LIAR dataset highlights the difficulty in creating a proper fake news classifier. When trying to
+generalise a model, questions about what consitutes reliable, fake or misleading news quickly arises. Does a publication raising awareness
+of the real side-effects of the HPV vaccine count as reliable? And how does an algorithm distinguish this from a
+publication spreading fake statistics of the corona vaccine? Whilst there are publishers that we all (generally)
+accept as being reliable, and others that are generally percieved as being unreliable, the exact line delineating the
+two is hard (if not impossible) to strongly define.
+
+
+In this technical report we described the exploration of three different models for fake news classification. We started
+by outlining the data import, exploration and processing we applied to the FakeNewsCorpus dataset. The processing
+included both tokenisation, feature extracting using TF-IDF and dimensionality reduction through single value
+decomposition. We build a logistic regression model to serve as our baseline, and then constructed three more complex
+models (two DNNs and an XGBoost model). Whilst all of the models performed admirably on the FakeNewsCorpus dataset, they
+all failed to generalise when we tested them against another dataset (LIAR). As discussed in our evaluation section,
+this is likely due both to the quality of our dataset and the inherent difficulties in constructing fake news
+classifiers in general. In the end we conclude that our approach has failed to build a general fake news classifier, and
+that more sophisticated tools need to be incorporated in order to achieve generalisable success.
+

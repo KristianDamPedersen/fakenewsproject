@@ -8,20 +8,18 @@ pytest = "*"
 pandas = "*"
 requests = "*"
 xgboost = "*"
-dask = {extras = ["distributed"], version = "*"}
 nltk = "*"
 graphviz = "*"
-dask-ml = "*"
 fastparquet = "*"
 matplotlib = "*"
 spacy = "*"
-sentence-transformers = "*"
 jupyter = "*"
 torch = "*"
 gensim = "*"
 mysql-connector = "*"
 black = {extras = ["jupyter"], version = "*"}
 tensorflow = "*"
+umap-learn = "*"
 
 [dev-packages]
 
