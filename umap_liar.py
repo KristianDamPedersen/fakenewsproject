@@ -1,5 +1,4 @@
-# Same as umaptest but liar is not added in the UMAP fit
-
+# Same as other UMAP but the original dataset is greyed out and the colours are the various classes from the LIAR dataset.
 import umap
 import numpy as np
 import pandas as pd
@@ -7,10 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import pickle
 from custom_tokeniser import custom_tokenizer
-
-
-def pass_fun(doc):
-    return doc
+from lib.pass_fun import pass_fun
 
 
 print("loading models")
@@ -55,11 +51,11 @@ classes = [
 ]
 y_train = df["type"]
 
+
+# We generate the word embedding
 embedding = reducer.transform(svd.transform(tfidf.transform(df["tokens"])))
 
 print("done transforming umap")
-# Replace each label in y_train with a number
-
 # Assign each class a number
 target = np.zeros(y_train.shape, dtype=int)
 for i, c in enumerate(classes):
@@ -74,15 +70,17 @@ colours = [
     "#FF003E",  # False
     "#0000FF",  # Pants on fire
 ]  # Liar Data (All classes)
-# Plot
+# Scatter plot
 plt.scatter(
     *embedding.T, c=[colours[i] for i in target], s=0.05, alpha=0.5, marker=",", lw=0
 )
 
+# Legends for the various classes
 plt.legend(
     handles=[
         mpatches.Patch(color=colours[i], label=classes[i]) for i in range(len(classes))
     ]
 )
 
+# We save the figure, this image exists as an altered figure in the document
 plt.savefig("liar_binary.png", dpi=3600)
