@@ -47,18 +47,28 @@ except:
     pickle.dump(lr, open("data/logreg.pkl", "wb"))
     print("finished fitting models")
 
+print("Loading data")
 df_test = pd.read_parquet("data/test.parquet")
+print("Data loaded")
 
+print("Defining X and Y test sets")
 X_test = df_test["tokens"]
 y_test = df_test["class"]
 
+print("Applying svd and tf-idf on the X test set")
 X_test = svd.transform(tfidf.transform(X_test))
-y_pred = lr.predict(X_test)
-y_prob = lr.predict_prob(X_test)
-print(classification_report(y_test, y_pred))
 
-# Save results for later use
+# y_pred = lr.predict(X_test)
+print("Predicting...")
+y_prob = lr.predict_proba(X_test)
+# print(classification_report(y_test, y_pred))
+
+# Save results for later useA
+print("Gathering results ...")
 y_pred = np.array(y_prob)  # Your predictions
 y_true = np.array(y_test)  # True labels
+print("Writing data ...")
 np.save("data/predictions/simple_y_probs.npy", y_pred)
 np.save("data/predictions/simple_y_true.npy", y_true)
+
+print("Executed succesfully, exiting...")
