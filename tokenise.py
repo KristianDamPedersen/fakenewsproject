@@ -1,6 +1,6 @@
 # This is step 2
 import sys
-from custom_tokeniser import custom_tokenizer
+from lib.custom_tokeniser import custom_tokenizer
 from multiprocessing import Pool
 import pandas as pd
 import glob
