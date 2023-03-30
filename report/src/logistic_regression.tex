@@ -1,25 +1,8 @@
 \section{Simple model: Logistic Regression (1/2 page)} 
-For our baseline, we chose to use a logistic regression model. We chose logistic regression, as it serves as a
-relatively simple model to implement, but one that is still suited for classification and could achieve good results on
-the dataset. Much of the heavy lifting in developing this model took place in the previous sections,
+For our baseline, we chose to use a logistic regression model. Much of the heavy lifting in developing this model took place in the previous sections,
 so once we reached this step we chose to just use a relatively naive implementation, using the default values provided
-by \textit{scikit-learn}. This meant we had the following hyperparameters for our model:
-
-\begin{enumerate}
-  \item \textbf{Penalty}: l2. This form of penalty adds a penatly that is equal to the square of the magnitude of the
+by \textit{scikit-learn}. This meant we had the following hyperparameters for our model. \textbf{Penalty}: l2. This form of penalty adds a penatly that is equal to the square of the magnitude of the
     coefficients of the model. In other words, it tries to limit the influence that any single coefficient has on the
-    model.
-
-  \item \textbf{Solver}: lbfgs (limited memory BFGS). This solver is especially useful on "smaller" datasets (such as
+    model. \textbf{Solver}: lbfgs (limited memory BFGS). This solver is especially useful on "smaller" datasets (such as
     ours), both because it is quick to train, but also because it is memory efficient which helps us on limited
     hardware.
-
-\end{enumerate}
-
-\subsection{Shortcomings}
-With simplicity also comes drawbacks. Compared to more complex models such as the DNN we will discuss in the next
-section, a logistic regression will lack sensitivity to the nuances in the dataset. However, it did perform admirably.
-
-One potential shortcoming is wether or not our data is linearly seperable
-
-
