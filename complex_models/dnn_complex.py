@@ -107,7 +107,6 @@ except:
     dnn.save("data/smollboi2")
 
 test_df = pd.read_parquet("data/test.parquet", engine="fastparquet")
-test_df = pd.read_parquet("data/test.parquet", engine="fastparquet")
 
 X_test = test_df["tokens"]
 y_test = test_df["class"]
@@ -117,13 +116,13 @@ X_test = transform(X_test)
 
 y_pred = dnn.predict(X_test)
 y_pred_binary = (y_pred > 0.5)
-acc = accuracy_score(y_test, y_pred > 0.5)
+acc = accuracy_score(y_test, y_pred_binary)
 print(f"Accuracy {acc}")
 
 # >0.5 is used to make the valies of y_pred discrete since tensorflow spits them out in floats. This could be calibrated instead.
 print(classification_report(y_test, y_pred_binary))
 
-y_pred = np.array(y_test)  # Your predictions
+y_pred = np.array(y_pred)  # Your predictions
 y_test = np.array(y_test)  # True labels
 np.save("data/predictions/dnn_y_preds.npy", y_pred)
 np.save("data/predictions/dnn_y_true.npy", y_test)
