@@ -47,7 +47,7 @@ We decided to visualize the performance using ROC comparison, and as we see from
 
 \begin{figure}[htpb]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/ROC_combined}
+  \includegraphics[width=1\textwidth]{figures/ROC_combined}
   \caption{ROC comparison - FakeNewsCorpus and LIAR}
   \label{fig:roc}
 \end{figure}
@@ -55,9 +55,14 @@ We decided to visualize the performance using ROC comparison, and as we see from
 
 \subsubsection{UMAP and lack of seperability in LIAR}
 As we did in the beginning, we decided to put the LIAR dataset through the UMAP model that was fitted to the
-FakeNewsCorpus dataset. From figure (REF) we see that the articles in the LIAR dataset completely lacks seperability,
+FakeNewsCorpus dataset. From figure \ref{fig:liarvsfake} we see that the articles in the LIAR dataset completely lacks seperability,
 meaning our models have no real way of delineating them from eachother.
-
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=1\textwidth]{figures/umapLiarVsFake}
+  \caption{UMAP - LIAR overlayed on FakeNewsCorpus}
+  \label{fig:liarvsfake}
+\end{figure}
 
 \subsection{Ethical considerations with fake news classification}
 The subpar performance on the LIAR dataset highlights the difficulty in creating a proper fake news classifier. When trying to
@@ -66,3 +71,4 @@ of the real side-effects of the HPV vaccine count as reliable? And how does an a
 publication spreading fake statistics of the corona vaccine?. Whilst there are publishers that we all (generally)
 accept as being reliable, and others that are generally percieved as being unreliable, the exact line delineating the
 two is hard (if not impossible) to strongly define.
+\newpage
