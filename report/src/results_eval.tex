@@ -42,8 +42,15 @@ particular by the relatively terrible accuracy acheived on the LIAR dataset as s
 \end{table}
 
 \subsubsection{ROC comparison}
-We decided to visualize the performance using ROC comparison, and as we see from figure (REF), all of the models lose
+We decided to visualize the performance using ROC comparison, and as we see from figure \ref{fig:roc}, all of the models lose
 (almost) all their predictive power when we apply them to the LIAR dataset.
+
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/ROC_combined}
+  \caption{ROC comparison - FakeNewsCorpus and LIAR}
+  \label{fig:roc}
+\end{figure}
 
 
 \subsubsection{UMAP and lack of seperability in LIAR}
