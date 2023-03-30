@@ -50,7 +50,7 @@ try:
     print('Tf-idf pickle read!')
 except:
     print('pickle not found. Refitting vectoriser')
-    df = pd.read_parquet(parquet_small_train, columns=['tokens'])
+    df = pd.read_parquet(parquet_small_train, columns=['tokens'], engine='fastparquet')
     tfidf_vectorizer.fit(df['tokens'])
     pickle.dump(tfidf_vectorizer, open(tfidf_pickle, 'wb') )
 

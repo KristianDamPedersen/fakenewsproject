@@ -79,7 +79,7 @@ except:
     dnn.add(Dense(16, activation="relu"))
     dnn.add(Dense(1, activation="sigmoid"))
 
-    val_df = pd.read_parquet("data/val.parquet", columns=["tokens", "class"])
+    val_df = pd.read_parquet("data/val.parquet", columns=["tokens", "class"], engine="fastparquet" )
 
     print("loading val")
     X_val = val_df["tokens"].to_numpy()
@@ -106,8 +106,7 @@ except:
     print("saving model")
     dnn.save("data/smollboi2")
 
-test_df = pd.read_parquet("data/test.parquet")
-test_df = pd.read_parquet("data/test.parquet")
+test_df = pd.read_parquet("data/test.parquet", engine="fastparquet" )
 
 X_test = test_df["tokens"]
 y_test = test_df["class"]
