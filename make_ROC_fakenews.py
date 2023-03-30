@@ -60,7 +60,7 @@ plt.figure()
 for model in models:
     fpr, tpr, _ = roc_curve(model['true'], model['probs'])
     roc_auc = auc(fpr, tpr)
-    plt.plot(fpr, tpr, color=model['color'], lw=1, label=f"{model['name']} (AUC = {roc_auc:.2f})")
+    plt.plot(fpr, tpr, color=model['color'], lw=1, label=f"{model['name']} (AUC = {roc_auc:.3f})")
 
 
 plt.plot([0, 1], [0, 1], color='navy', lw=1, linestyle='--')
