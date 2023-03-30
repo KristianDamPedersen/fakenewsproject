@@ -30,8 +30,8 @@ reliable, rumor, satire, unknown, unreliable]. The number of articles in each ca
   \label{fig:combdist}
 \end{figure}
 \subsubsection{Vocabulary sizes}
-After getting the data into a managable format, we were then able to start properly exploring it. We started by
-calculating the vocabulary size of the dataset. We did this by first tokenising the data, and then counting the
+As an exploration, we decided to calculate the vocabulary size of a sample of the dataset. We did this by first
+tokenising the sample, and then counting the
 unique tokens. We then repeated this process after removing stopwords, and finally after stemming the tokens. The
 results are shown in table \ref{tab:vocab_sizes}. As we can see the vocabulary decreases slightly after removing
 stopwords, and significantly after stemming. As we see, removing a list of common words doesn't reduce the vocabulary
@@ -57,7 +57,7 @@ much, but reducing words to their root does.
 
 \subsubsection{Classifying truth per domain}\label{sec:truth_pr_domain}
 A central aspect of the dataset, is the way it classifies news articles in terms of reliability. The creators of the
-dataset has chosen to classify the articles per domain, meaning that all the articles from any given domain will be
+dataset have chosen to classify the articles per domain, meaning that all the articles from any given domain will be
 given the same level of credibility.
 
 \subsubsection{Duplicated articles}\label{sec:dup_articles}
@@ -90,12 +90,12 @@ trained the model unsupervised to get the inherent distribution of the data with
 \end{figure}
 
 The plot, figure \ref{fig:umap_explore} contains a large cluster which contains a rough mix of everything which UMAP
-couldn't separate as well as some more concentrated cluster of junk science and conspiracy articles. On the boundaries
-of this cluster, we have some more concentrated clusters that the model was able to separete, this includes reliable,
-fake. Away from the main cluster, we have a large cluster of almost entirely reliable content the model was easily able
+couldn't separate as well as some more concentrated clusters of junk science and conspiracy articles. On the boundaries
+of the big cluster, we have some more concentrated clusters that the model was able to separete, this includes reliable
+and fake. Away from the main cluster, we have a large cluster of almost entirely reliable content the model was easily able
 to separate. As we see in figure \ref{fig:combdist} NY Times is by far the most represented domain, and all the
 articles coming from this domain is marked as reliable. Consequently, the large reliable cluster we see here consists of the
-articles from NY Times. We were able to determine this, by querying the UMAP model for the specific coordinates of a various of articles from a selection of sources. Other clusters far apart include unreliable and rumors.\\
+articles from NY Times. We were able to determine this, by querying the UMAP model for the specific coordinates of various articles from a selection of sources. Other clusters far apart include unreliable and rumors.\\
 The clear deliniation of the reliable data served as part of our justification for the binary grouping of \textit{reliable} and \textit{unreliable}. 
 
 

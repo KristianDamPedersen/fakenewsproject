@@ -13,29 +13,30 @@ reason that it is better to accidentally label a reliable article as false, than
 article as reliable.
 
 \subsubsection{Splitting the dataset}
-We decided to split our data into into a training, validation and testing set, with a 80-10-10 split.
+We decided to split our data into into a training, validation and testing set, with a 80-10-10 split. And then balanced
+the training data.
 
 \subsubsection{Tokenisation}
 We tokenised the text by first splitting it into
-individual words, removing stop words and using lemmatisation to further reduce the vocabulary by condensing words into
-base form.
+individual words, removing stop words and using lemmatisation to further reduce the vocabulary by reducing the words into
+their base form.
 
 \subsubsection{Feature extraction using TF-IDF}
 After tokenising the content column, we were then able to train a TF-IDF (Term Frequency - Inverse Document Frequency)
-model on it. This model looks at how often a given token (word) appears in an article, and compares it to how big that
-document is. By training this model, we essentially output a large vector, which we can use to encode the tokens into a
+model on it. This model looks at how often a given token (word) appears in an article, and comparing to how many times
+that token appears accross the entire dataset. By training this model, we essentially output a large vector, which we can use to encode the tokens into a
 large matrix that can be fed into our models.
 
 \subsubsection{Dimensionality reduction using Truncated Single Value Decomposition (SVD)}
 After encoding the data using our TF-IDF model, we were left with quite a large input space, which meant that it would
-be useful for us to reduce the dimensionality of our input matrix. In other words, we wanted to group similar elements
-(or flags) together, such that the models we build have a more clear delineation between inputs. To this we used
+be useful for us to reduce the dimensionality of our input tensor. In other words, we wanted to group similar elements
+(or flags) together, such that the models we build have a more clear delineation between inputs. To do this we used
 truncated single value decomposition (SVD). SVD works by factoring a matrix with the hopes to extract most impactful
 elements of it.
 
 \subsubsection{Individual model differences}
-Whilst the above steps are broadly applicable to all the models we built, there was some individual differences on what
-steps and what hyperparameters each model was built with. These are seen in figure \ref{fig:pipeline}.
+Whilst the above steps are broadly applicable to all the models we built, there was some individual difference from
+model to model. These are seen in figure \ref{fig:pipeline}.
 
 \begin{figure}[htpb]
   \centering
