@@ -9,8 +9,8 @@ H("SVD - 256");
 I("SVD - 384");
 J("Logistic regression");
 K("XGBoost");
-L("Baseline DNN");
-M("Alternative DNN");
+L("Small DNN");
+M("Large DNN");
 N("CLEANING");
 O("TOKENIZATION");
 P("TEST-TRAIN-VAL SPLIT")
