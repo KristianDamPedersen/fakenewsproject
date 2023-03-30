@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, roc_curve, roc_auc_score, auc
+from sklearn.metrics import classification_report, roc_curve, roc_auc_score, auc, confusion_matrix
 from tensorflow.keras.models import Sequential, load_model
 
 def main():
@@ -113,11 +114,37 @@ def evaluate_pipeline(pipeline, models, X, y):
 
     print(f"Results for {pipeline['name']}")
     print(classification_report(y, y_pred_binary))
-
+    save_matrix(pipeline['name'], y, y_pred_binary)
     # Calculate the ROC curve, AUC score and add the line
     fpr, tpr, _ = roc_curve(y, y_pred)
     roc_auc = auc(fpr, tpr)
     plt.plot(fpr, tpr, color=pipeline['color'], lw=1, label=f'{pipeline["name"]} (AUC = %0.3f)' % roc_auc)
+
+def save_matrix(name, y_true, y_pred):
+    path='report/src/figures/'
+    # Make confusion matrix
+    conf_matrix = confusion_matrix(y_true, y_pred, normalize="true")
+    # Plot confusion matrix
+    plt.figure(figsize=(5, 5))
+    plt.imshow(conf_matrix, interpolation="nearest", cmap=plt.cm.gray_r)
+    for i in range(2):
+        for j in range(2):
+            plt.text(
+                j,
+                i,
+                format(conf_matrix[i, j], ".2f"),
+                horizontalalignment="center",
+                color="white" if conf_matrix[i, j] > 0.5 else "black",
+            )
+
+    plt.xlabel("Predicted label")
+    plt.ylabel("True label")
+    plt.axis('off')
+    plt.title(name)
+
+# Save confusion matrix as PNG file
+    plt.savefig(path+name+'_conf_matrix.png', dpi=300, bbox_inches='tight')
+
 
 
 if __name__ == '__main__': 
