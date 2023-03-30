@@ -5,8 +5,7 @@ dataset. And we will end of this evaluation by discussing the challenges in gene
 ethical and practical challenges such a model encounters.
 
 \subsection{Relative performance on FakeNewsCorpus}
-Let's begin by looking at our models performance on the FakeNewsCorpus dataset. As we see from table \ref{tab:
-fakenewsperformance},
+Let's begin by looking at our models performance on the FakeNewsCorpus dataset. As we see from table \ref{tab:fakenewsperformance},
 both of our models performed admirably when being run against the test set, with our more complex DNN pulling ahead by
 about . This can largely be contributed to the extra nuances that the complex model was able to detect in
 the dataset.
@@ -37,7 +36,6 @@ particular by the relatively terrible accuracy acheived on the LIAR dataset as s
   \centering
   \caption{Model performance on LIAR dataset}
   \label{tab:liarperformance}
-
   \begin{tabular}{c|cccc}
     Model & Logistic Regression & Large DNN & Small DNN & XGBoost \\ \hline
     Precision (True / False) & 0.17 / 0.84  & 0.18 / 0.84 & 0.18 / 0.84 & 0.17 / 0.84 \\ \hline

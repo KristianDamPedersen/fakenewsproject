@@ -105,12 +105,12 @@ We have made a 2D UMAP representation of the dataset, which is a form of non-lin
 trained the model unsupervised to get the inherent distribution of the data without any labelling bias.
 \begin{figure}[htpb]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/ROC_LIAR}
+  \includegraphics[width=0.8\textwidth]{figures/WOLiar_cropped}
   \caption{UMAP representation}
   \label{fig:umap_explore}
 \end{figure}
 
-The plot contains a large cluster which contains a rough mix of everything which UMAP couldn't separate as well as some more concentrated cluster of junk science and conspiracy articles. On the boundaries of this cluster, we have some more concentrated clusters that the model was able to separete, this includes reliable, fake. Away from the main cluster, we have a large cluster of almost entirely reliable content the model was easily able to separate from everything else, other clusters far apart include unreliable, rumors and highly invariate hate news and satire (very small concentrated clusters). This serves as our justication for our binary grouping of the dataset since realiable articles are clearly delineated from the rest of the dataset. 
+The plot, figure \ref{fig:umap_explore} contains a large cluster which contains a rough mix of everything which UMAP couldn't separate as well as some more concentrated cluster of junk science and conspiracy articles. On the boundaries of this cluster, we have some more concentrated clusters that the model was able to separete, this includes reliable, fake. Away from the main cluster, we have a large cluster of almost entirely reliable content the model was easily able to separate from everything else, other clusters far apart include unreliable, rumors and highly invariate hate news and satire (very small concentrated clusters). This serves as our justication for our binary grouping of the dataset since realiable articles are clearly delineated from the rest of the dataset. 
 
 
 
