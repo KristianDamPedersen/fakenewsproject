@@ -59,16 +59,16 @@ for i, c in enumerate(classes):
 
 colours = [
     "grey",  # Fake news corpus
-    "#005500",   # True
+    "#008800",   # True
     "#229922",   # Mostly true
-    "#669900",   # Half true
-    "#884400",   # Barely true
+    "#DDDD00",   # Half true
+    "#FF4400",   # Barely true
     "#DD0000",   # False
     "#0000FF",   # Pants on fire
 ]  # Liar Data (All classes)
 # Plot
 plt.scatter(
-    *embedding.T, c=[colours[i] for i in target], s=0.1, alpha=0.5, marker=",", lw=0
+    *embedding.T, c=[colours[i] for i in target], s=0.05, alpha=0.5, marker=",", lw=0
 )
 
 plt.legend(
