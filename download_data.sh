@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # Download all of the 9 parts including the main zip
 cd data/
 for i in {01..09} "ip"
