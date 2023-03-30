@@ -176,11 +176,20 @@ for x_file, y_file in zip(test_files, test_label_files):
         y_pred.extend(y_pred_chunk)
         y_true.extend(y_batch)
 
+
+
 # Calculate the accuracy
 print(f'classification report: biggus chungus, on {step} data')
 print('finished:', datetime.datetime.now())
 print(classification_report(y_true, y_pred_binary))
 
+
+# Save results for later use
+y_pred = np.array(y_pred)  # Your predictions
+y_true = np.array(y_true)  # True labels
+np.save("data/predictions/big_dnn_y_preds.npy", y_pred)
+np.save("data/predictions/big_dnn_y_true.npy", y_true)
+"""
 # Calculate the ROC curve and AUC score
 fpr, tpr, _ = roc_curve(y_true, y_pred)
 roc_auc = auc(fpr, tpr)
@@ -193,9 +202,9 @@ plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.05])
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
-plt.title('ROC (Complex model A)')
+plt.title('ROC (Bigdnn)')
 plt.legend(loc="lower right")
 #plt.show()
 
-plt.savefig('figures/ROC_curve_complex_A.png')
-
+plt.savefig('figures/ROC_curve_bigdnn_complex.png')
+"""
