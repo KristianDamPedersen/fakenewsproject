@@ -1,7 +1,7 @@
 \section{Results and evaluation}
 In this section we will discuss the performance of both our simple and complex models, and discuss how these stack up
 against eachother. We will discuss the accuracy and performance on both the FakeNewsCorpus dataset and the LIAR
-dataset. And we will end of this evaluation by discussing the challenges in general fake news classifiers, and the
+dataset. And we will end this evaluation by discussing the challenges in general fake news classifiers, and the
 ethical and practical challenges such a model encounters.
 
 \subsection{Relative performance on FakeNewsCorpus}
@@ -27,7 +27,7 @@ comfortably.
 However, whilst these results are impressive, they also hint that our models might be overfitted to our domain. This is
 likely due to the nature of the dataset we used for training not being general enough, which means a broader selection
 of data sources and data sets would be needed to achieve a more generalisable model. This issue is highlighted in
-particular by the relatively terrible accuracy acheived on the LIAR dataset as seen in table \ref{tab:liarperformance}.
+particular by the relatively terrible accuracy achieved on the LIAR dataset as seen in table \ref{tab:liarperformance}.
 
 \begin{table}[htpb]
   \centering
@@ -42,7 +42,7 @@ particular by the relatively terrible accuracy acheived on the LIAR dataset as s
 \end{table}
 
 \subsubsection{Performance visualisation}
-These different metrics can be difficult to parse when evaluating on unbalanced datasets. This is where visual aids can come in handy. Confusion matrixes and ROC curves effectively show how horribly bad our models were, at predicting out of domain. In the confusion matrices, we see all guesses arranged in 'columns', which represents a biased classifier (figure \ref{fig:conf_mat}). The ROC curves (figure \ref{fig:roc}) likewise show (almost) zero predictive power for all models.
+These different metrics can be difficult to parse when evaluating on unbalanced datasets. This is where visual aids can come in handy. Confusion matrices and ROC curves effectively show how horribly bad our models were, at predicting out of domain. In the confusion matrices, we see all guesses arranged in 'columns', which represents a biased classifier (figure \ref{fig:conf_mat}). The ROC curves (figure \ref{fig:roc}) likewise show (almost) zero predictive power for all models.
 
 \begin{figure}[htpb]
   \centering
