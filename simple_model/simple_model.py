@@ -61,7 +61,8 @@ X_test = svd.transform(tfidf.transform(X_test))
 # y_pred = lr.predict(X_test)
 print("Predicting...")
 y_prob = lr.predict_proba(X_test)
-# print(classification_report(y_test, y_pred))
+y_pred = [b > 0.5 for a, b in y_prob]
+print(classification_report(y_test, y_pred))
 
 # Save results for later useA
 print("Gathering results ...")

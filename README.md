@@ -2,30 +2,24 @@
 Group 1 - shared repository related to the Fake News Project in Data Science 2023.
 
 ## Pipeline
-In order to reproduce our pipeline:
-1. Run `download_data.sh` which downloads, extracts and does some error correction to the dataset.
-2. Go through the steps in `preprocess.ipynb`.
-3. Choose which script to run, it being one of either:
+In order to reproduce our pipeline on FakeNews dataset:
+1. Run `download_data.sh` which downloads, extracts and removes carriage returns.
+2. Enter the virtual python env by running `pipenv shell`
+3. Go through the steps in `preprocess.ipynb`.
+4. Choose which script to run, it being one of either:
    * `simple_model/simple_model.py`
-   * `complex_models/complex_model_A.py`
+   * `complex_models/bigdnn_complex.py`
    * `complex_models/dnn_complex.py`
    * `complex_models/xgboost_complex.py`
 
-#### Folder strucure
-Here is an overview of our folder-structure:
-* fakenewsproject/
-  * README.md
-  * meetings/
-    * ...
-  * simple_model/
-    * simple_model.py
-  * complex_models/
-    * bigdnn_complex.py
-    * xgboost_complex.py
-    * dnn_complex.py
-  * report/
-    * preamble.tex
-    * master.tex
-    * report.pdf
-  * notebooks/
-    * ...
+Some of these scripts require copious amounts of RAM, (+30 GiB)
+However, `bigdnn_complex.py` (ironically) does everything in chunks, except when fitting the `tf-idf` vectoriser. This can however be done rather effectively on a single parquet file from test.parquet, making it possible to run train and predict this model on a low-ressource computer, even using the entire dataset.
+
+* Running `umap_fake.py`, or `umap_liar.py` produces beautiful unsupervised maps of the corpus.
+
+## LIAR
+To prepare dataset:
+1. Run `liar/download_data.sh`
+2. Run `liar/tokenise.py`
+
+Now the liar dataset is ready and you can run `predict_on_liar.py` to check how to models perform on this out-of-domain data.
