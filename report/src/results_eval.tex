@@ -5,11 +5,9 @@ dataset. And we will end of this evaluation by discussing the challenges in gene
 ethical and practical challenges such a model encounters.
 
 \subsection{Relative performance on FakeNewsCorpus}
-Let's begin by looking at our models performance on the FakeNewsCorpus dataset. As we see from table \ref{tab:
-fakenewsperformance},
-both of our models performed admirably when being run against the test set, with our more complex DNN pulling ahead by
-about . This can largely be contributed to the extra nuances that the complex model was able to detect in
-the dataset.
+Let's begin by looking at our models performance on the FakeNewsCorpus dataset. As we see from table \ref{tab:fakenewsperformance},
+all of our models performed admirably when being run against the test set, with our more complex models pulling ahead
+comfortably.
 
 \begin{table}[htpb]
   \centering
@@ -24,10 +22,8 @@ the dataset.
     Size & 16.6 MB & 121 MB & 34 MB & 29.8 MB 
   \end{tabular}
 \end{table}
-\todo{are sizes correct, and what do you think about summarizing with accuracy f1-score?}
 
 \subsection{Generalisability and why the models are shit at LIAR}
-\todo{This is where we include Josh' magnificent visualizations!}
 However, whilst these results are impressive, they also hint that our models might be overfitted to our domain. This is
 likely due to the nature of the dataset we used for training not being general enough, which means a broader selection
 of data sources and data sets would be needed to achieve a more generalisable model. This issue is highlighted in
@@ -37,7 +33,6 @@ particular by the relatively terrible accuracy acheived on the LIAR dataset as s
   \centering
   \caption{Model performance on LIAR dataset}
   \label{tab:liarperformance}
-
   \begin{tabular}{c|cccc}
     Model & Logistic Regression & Large DNN & Small DNN & XGBoost \\ \hline
     Precision (True / False) & 0.17 / 0.84  & 0.18 / 0.84 & 0.18 / 0.84 & 0.17 / 0.84 \\ \hline
@@ -46,17 +41,12 @@ particular by the relatively terrible accuracy acheived on the LIAR dataset as s
   \end{tabular}
 \end{table}
 
-In addition to challenges regarding the available data, there are other challenges that any fake news classifier
-encounters as we will discuss next.
+\subsubsection{ROC comparison}
+Lorem ipsum
 
 \subsection{Ethical considerations with fake news classification}
-The subpar performance on the LIAR dataset highlights the difficulty in creating a proper fake news classifier. Many
-companies have tried and failed to automatically moderate fake news due to the nuances that gets introduced when moving
-from extremely domain specific models, to more generalised models working on multiple domains. When trying to
-generalise a model, questions about what consitutes reliable, fake or misleading news quickly arises. Are all
-politically motivated publications fake / unreliable? The IMF, European Central Bank, Red Cross and many more, are all
-inherently political organisations, which we all still generally percieve as reliable. On the same token, publications
-on eugenics from nazi era germany are generally seens as unreliable. Furthermore, does a publication raising awareness
+The subpar performance on the LIAR dataset highlights the difficulty in creating a proper fake news classifier. When trying to
+generalise a model, questions about what consitutes reliable, fake or misleading news quickly arises. Does a publication raising awareness
 of the real side-effects of the HPV vaccine count as reliable? And how does an algorithm distinguish this from a
 publication spreading fake statistics of the corona vaccine?. Whilst there are publishers that we all (generally)
 accept as being reliable, and others that are generally percieved as being unreliable, the exact line delineating the
