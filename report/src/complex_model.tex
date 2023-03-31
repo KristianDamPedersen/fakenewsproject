@@ -6,9 +6,9 @@ XGBoost is an ensemble learner, meaning it is a collection of smaller models. Th
 This model uses TF-IDF 4096 without further dimensionality reduction. It is a simple feed-forward network with the
 layers 1024, DO, 512, DO, 256, DO, 128, DO, 64, 1 where DO is a drop-out layer of 0.2, meaning every epoch it resets 20\%
 of the weights. The idea with this funnel-shaped network was that it would reduce the dimensions on its own and learn
-how to classify the dataset with minimal loss of data. Shortcomings of the model: The model is on the larger side (57 MiB), was slow to train and has a slow inference speed.
+how to classify the dataset with minimal loss of data. Shortcomings of the model: The model is on the larger side (57 MiB), was slow to train and has a slow inference speed. This model was trained on the full $\approx 3.0$ million samples.
 
 \subsection{Small DNN}
 This model is a more traditionally shaped feed-forward network. Since the data was passed through dimensionality reduction
-already, it means the initial input space can be smaller. The layers are: 384, DO, 512, DO, 512, DO, 128, DO', 16, 1.
+already, it means the initial input space can be smaller. The layers are: 384, DO, 512, DO, 512, DO, 128, DO', 16, 1. This was trained on 1.5 million samples.
 DO' is a dropout of 0.1 and DO is the same as in the large DNN. The initial SVD step made this model much smaller, and faster at inference.

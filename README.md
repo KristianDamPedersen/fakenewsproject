@@ -13,7 +13,7 @@ In order to reproduce our pipeline on FakeNews dataset:
    * `complex_models/xgboost_complex.py`
 
 Some of these scripts require copious amounts of RAM, (+30 GiB)
-However, `bigdnn_complex.py` (ironically) does everything in chunks, except when fitting the `tf-idf` vectoriser. This can however be done rather effectively on a single parquet file from test.parquet, making it possible to run train and predict this model on a low-ressource computer, even using the entire dataset.
+However, `bigdnn_complex.py` (ironically) does everything in chunks, except when fitting the `tf-idf` vectoriser. This can however be done rather effectively on a single parquet file from test.parquet, making it possible to run train and predict this model on a low-resource computer, even using the entire dataset. Other files such as `tokenise.py` exists as a headless alternative to some of the steps in the notebook so that it can be run in a terminal.
 
 * Running `umap_fake.py`, or `umap_liar.py` produces beautiful unsupervised maps of the corpus.
 
@@ -23,3 +23,7 @@ To prepare dataset:
 2. Run `liar/tokenise.py`
 
 Now the liar dataset is ready and you can run `predict_on_liar.py` to check how to models perform on this out-of-domain data.
+
+# Dependencies
+`pipenv` is required to ensure that your python environment is the correct one.  
+Nix flakes were used to install `pipenv` on our server. 

@@ -12,9 +12,9 @@ encoded as 0's. With this approach we will be (perhaps unfairly) strict in our j
 reason that it is better to accidentally label a reliable article as false, than it is to accidentally label a false
 article as reliable.
 
-\subsubsection{Splitting the dataset}
-We decided to split our data into into a training, validation and testing set, with a 80-10-10 split. And then balanced
-the training data.
+\subsubsection{Preparing and splitting the dataset}
+We loaded the entire dataset into an SQL database, assigning each row a random number. This made it possible to shuffle and deduplicate the entire corpus efficiently, making further cunkwise processing viable.\\
+We then split our data into into training, validation and testing sets, with a 80-10-10 split, and balanced the training data.
 
 \subsubsection{Tokenisation}
 We tokenised the text by first splitting it into
@@ -28,11 +28,9 @@ that token appears accross the entire dataset. By training this model, we essent
 large matrix that can be fed into our models.
 
 \subsubsection{Dimensionality reduction using Truncated Single Value Decomposition (SVD)}
-After encoding the data using our TF-IDF model, we were left with quite a large input space, which meant that it would
-be useful for us to reduce the dimensionality of our input tensor. In other words, we wanted to group similar elements
-(or flags) together, such that the models we build have a more clear delineation between inputs. To do this we used
-truncated single value decomposition (SVD). SVD works by factoring a matrix with the hopes to extract most impactful
-elements of it.
+After encoding the data using our TF-IDF model, we were left with quite a large input space. It might then
+be useful for us to reduce the dimensionality of our input tensor. In other words, we wanted to group similar elements together, such that the models we build have a more clear delineation between inputs. To do this we used
+truncated single value decomposition (SVD), which works by factoring a matrix with the hopes of extracting the most impactful elements.
 
 \subsubsection{Individual model differences}
 Whilst the above steps are broadly applicable to all the models we built, there was some individual difference from
