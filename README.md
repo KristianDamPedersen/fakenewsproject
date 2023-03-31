@@ -1,5 +1,14 @@
 # Fake News Project
-Group 1 - shared repository related to the Fake News Project in Data Science 2023.
+Group 1 - shared repository related to the Fake News Project in Data Science 2023.  
+The code has only been tested on Linux (Arch, NixOS, Fedora). The code will not work on Windows since the scripts use UNIX paths.
+
+## Specs
+The code was run on various machines, the large multithreaded tasks (tokenisation, TF-iDF, SVD, UMAP, etc.) and the XGBoost, small DNN, and logistic regression were all trained on the server with specs below. Other tasks (big DNN, SQL, data exploration, etc.) were done on two other machines
+
+### Server
+- 40GiB RAM (2x8, 6x4), 20GiB of virtual compressed ram (ZRAM). DDR3 with 1333MHz clock.
+- i7-3820 CPU
+- p9x79 motherboard
 
 ## Pipeline
 In order to reproduce our pipeline on FakeNews dataset:
